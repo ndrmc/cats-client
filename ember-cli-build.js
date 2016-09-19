@@ -12,8 +12,10 @@ module.exports = function(defaults) {
 
   app.import('bower_components/jquery/dist/jquery.min.js')
 
-  app.import('assets/admin-lte/js/app.min.js')
-  app.import('assets/admin-lte/css/AdminLTE.min.css')
+  app.import('bower_components/AdminLTE/dist/css/AdminLTE.min.css')
+  app.import('bower_components/AdminLTE/dist/js/app.min.js')
+  app.import('bower_components/AdminLTE/dist/js/demo.js')
+  app.import('bower_components/AdminLTE/dist/js/pages/dashboard.js')
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
