@@ -1,10 +1,25 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
+
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    outputPaths: {
+    app: {
+      html: 'index.html',
+      css: {
+        'app': '/assets/css/cats-client.css'
+      },
+      js: '/assets/js/cats-client.js'
+    },
+    vendor: {
+      css: '/assets/css/vendor.css',
+      js: '/assets/js/vendor.js'
+    }
+  }
   });
 
 
@@ -22,12 +37,28 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
 
-  app.import('bower_components/jquery/dist/jquery.min.js')
+  app.import('bower_components/jquery/dist/jquery.min.js');
 
-  app.import('bower_components/bootstrap/dist/css/bootstrap.min.css')
-  app.import('bower_components/bootstrap/dist/js/bootstrap.min.js')
+  app.import('bower_components/jquery/dist/jquery.min.js');
+
+  app.import('bower_components/slimScroll/jquery.slimscroll.min.js');
+
+  app.import('bower_components/bootstrap/dist/css/bootstrap.min.css');
+
+  app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
+
+  app.import('bower_components/admin-lte/dist/css/AdminLTE.min.css');
+
+  app.import('bower_components/admin-lte/dist/css/skins/skin-blue-light.css');
+
+  app.import('bower_components/font-awesome/css/font-awesome.min.css');
+
+  var fontAwesomeFonts = new Funnel('bower_components/font-awesome/fonts', {
+    destDir: 'assets/fonts'
+  });
 
 
 
-  return app.toTree();
+
+  return MergeTrees( [app.toTree(), fontAwesomeFonts]);
 };
