@@ -1,4 +1,8 @@
-body {
-  min-height: 2000px;
-  padding-top: 70px;
+.main-sidebar, .left-side {
+  padding-top: 0px;
+}
+
+div.wrapper {
+  position: static;
+  height:  100vh; 
 }
