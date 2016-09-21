@@ -1,0 +1,8 @@
+.main-sidebar, .left-side {
+  padding-top: 0px;
+}
+
+div.wrapper {
+  position: static;
+  height:  100vh; 
+}
