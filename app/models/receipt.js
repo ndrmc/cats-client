@@ -1,19 +1,19 @@
 import DS from 'ember-data';
 import { hasMany } from 'ember-data/relationships';
 export default DS.Model.extend({
-  GRNNo: DS.attr(),
-  receivedDate: DS.attr('date'),
-  projectID: DS.attr(),
-  storeName: DS.attr(),
-  receivedBy: DS.attr(),
-  submittedBy: DS.attr(),
-  items: hasMany('receipt-item'),
-  weightBridgeTicketNo: DS.attr(),
-  weightBeforeUnloading: DS.attr(),
-  weightAfterUnloading: DS.attr(),
-  transporter: DS.attr(),
-  plateNo: DS.attr(),
-  trailerPlate: DS.attr(),
-  driverName: DS.attr(),
-  rev: DS.attr()
+    GRNNo: DS.attr('string'),
+    receivedDate: DS.attr('date'),
+    projectID: DS.attr('string'),
+    storeName: DS.attr('string'),
+    receivedBy: DS.attr('string'),
+    submittedBy: DS.attr('string'),
+    items: hasMany('receipt-item'),
+    weightBridgeTicketNo: DS.attr('string'),
+    weightBeforeUnloading: DS.attr('number'),
+    weightAfterUnloading: DS.attr('number'),
+    transporter: DS.attr('string'),
+    plateNo: DS.attr('string'),
+    trailerPlate: DS.attr('string'),
+    driverName: DS.attr('string'),
+    rev: DS.attr('string')
 });
