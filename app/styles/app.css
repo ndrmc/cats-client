@@ -4,5 +4,10 @@
 
 div.wrapper {
   position: static;
-  height:  100vh; 
+  height:  100vh;
+  overflow-y: auto;
+}
+
+li.treeview.active {
+  border-right: 2px solid #777;
 }
