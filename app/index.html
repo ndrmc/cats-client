@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>CATS Client</title>
 
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {{content-for "head"}}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {{content-for "head"}}
 
     <link rel="stylesheet" href="{{rootURL}}assets/css/vendor.css">
-    <link rel="stylesheet" href="{{rootURL}}assets/css/cats-client.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/css/cats-client.css"> {{content-for "head-footer"}}
+</head>
 
-    {{content-for "head-footer"}}
-  </head>
+<body class="hold-transition skin-blue-light">
 
-  <body  class="hold-transition skin-blue-light">
-
-    {{content-for "body"}}
-
-
-
-    {{content-for "body-footer"}}
+    {{content-for "body"}} {{content-for "body-footer"}}
 
 
     <script src="{{rootURL}}assets/js/vendor.js"></script>
     <script src="{{rootURL}}assets/js/cats-client.js"></script>
-  </body>
+</body>
+
 </html>
