@@ -1,9 +1,9 @@
 import DS from 'ember-data';
 import { hasMany } from 'ember-data/relationships';
 export default DS.Model.extend({
-    GRNNo: DS.attr('string'),
+    grnNo: DS.attr('string'),
     receivedDate: DS.attr('date'),
-    projectID: DS.attr('string'),
+    projectId: DS.attr('string'),
     storeName: DS.attr('string'),
     receivedBy: DS.attr('string'),
     submittedBy: DS.attr('string'),
