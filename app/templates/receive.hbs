@@ -2,6 +2,189 @@
   <h1>Store Receipts <small>GRN</small></h1>
 {{/ember-wormhole}}
 
+
+{{#if newGrnFormModalOpen }}
+
+  {{#modal-dialog close='toggleModalOpen'
+                  targetAttachment='none'
+                  container-class='form-modal-container'
+                  overlay-class='form-modal' }}
+
+        <div class="app-modal-header">
+          <i class="fa fa-close pull-right app-modal-close"  onclick={{action 'toggleModalOpen'}}></i>
+          <h4>New GRN</h4>
+        </div>
+
+
+        <div class="app-modal-body">
+          <form {{action 'addGoodReceipt' on='submit'}}>
+            <label for="grn">GRN</label>
+            <div class="form-group">
+              {{ input id="grn" type="text" class="form-control"  }}
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="grn">Received Date</label>
+                <div class="form-group">
+                  {{bootstrap-datepicker value=receivedDate}}
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Store</label>
+                <div class="form-group">
+                  <select class="form-control" name="">
+                    <option>Choose Store</option>
+                    <option>Adama Steel</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="grn">Project</label>
+                <div class="form-group">
+                  <select class="form-control" name="">
+                    <option>Choose Store</option>
+                    <option>Adama Steel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Received By</label>
+                <div class="form-group">
+                  {{ input id="receivedBy" type="text" class="form-control"  }}
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <h5>Receiving items</h5>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Commodity</th>
+                  <th>Batch</th>
+                  <th>UoM</th>
+                  <th>Quantity</th>
+                  <th>Waybill</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Wheat</td>
+                  <td>M####</td>
+                  <td>Mt</td>
+                  <td>250</td>
+                  <td>######</td>
+                </tr>
+
+                <tr>
+                  <td>Wheat</td>
+                  <td>M####</td>
+                  <td>Mt</td>
+                  <td>250</td>
+                  <td>######</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+
+            <h5>Transporter</h5>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="grn">Weight Bridge #</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Transporter</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="grn">Weight before unloading</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Plate #</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="grn">Weight after unloading</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Trailer plate #</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+
+              </div>
+
+              <div class="col-md-6">
+                <label for="grn">Driver's name</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+
+              </div>
+
+              <div class="col-md-6">
+                <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
+                <a href="#" class="btn btn-defails"><i class="fa fa-cancel"></i> Cancel</a>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+  {{/modal-dialog}}
+{{/if}}
+
+
+
+
 <div class="box">
 
   <div class="box-body">
@@ -30,7 +213,7 @@
       </div>
 
       <div class="col-xs-offset-3 col-xs-1">
-        <a class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+        <a class="btn btn-primary" onclick={{action 'toggleModalOpen'}}><i class="fa fa-plus"></i> Add</a>
       </div>
     </div>
 
@@ -74,6 +257,7 @@
       </tbody>
     </table>
   </div>
+
   <!-- /.box-body -->
   <div class="box-footer clearfix">
     <ul class="pagination pagination-sm no-margin pull-right">

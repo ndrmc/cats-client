@@ -1,0 +1,62 @@
+.main-sidebar, .left-side {
+  padding-top: 0px;
+}
+
+div.wrapper {
+  position: static;
+  height:  100vh;
+  overflow-y: auto;
+}
+
+li.treeview.active {
+  border-right: 2px solid #777;
+}
+
+li.treeview {
+  cursor: pointer;
+}
+
+aside.main-sidebar {
+  z-index: 49;
+}
+
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
+
+$modal-bg-color: #000;
+
+.form-modal {
+  background-color: rgba($modal-bg-color, .77);
+}
+
+.form-modal-container {
+  border-radius: 0px;
+  position: absolute;
+  width: 700px;
+  left: 50%;
+  margin-left:  -350px;
+  top: 20px;
+  padding:0px;
+  overflow-y: auto;
+}
+
+.app-modal-header  {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+  padding: 12px;
+}
+
+.app-modal-body {
+  padding: 25px;
+}
+
+i.app-modal-close {
+  font-size: 1.3em;
+  font-weight: 100;
+  color: #b3b1b1;
+  cursor: pointer;
+  position: absolute;
+  right: 19px;
+  top: 21px;
+}
