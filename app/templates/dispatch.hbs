@@ -1,0 +1,285 @@
+{{#ember-wormhole to="page-header"}}
+  <h1>Store Issue <small>GIN</small></h1>
+{{/ember-wormhole}}
+
+
+{{#if newGinFormModalOpen }}
+
+  {{#modal-dialog close='toggleGinModalOpen'
+                  targetAttachment='none'
+                  container-class='form-modal-container'
+                  overlay-class='form-modal' }}
+
+        <div class="app-modal-header">
+          <i class="fa fa-close pull-right app-modal-close"  onclick={{action 'toggleGinModalOpen'}}></i>
+          <h4>New GIN</h4>
+        </div>
+
+
+        <div class="app-modal-body">
+          <form {{action 'addDispatch' on='submit'}}>
+            <label for="gin">GIN</label>
+            <div class="form-group">
+              {{ input id="grn" type="text" class="form-control"  }}
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label for="grn">Received Date</label>
+                <div class="form-group">
+                  {{bootstrap-datepicker value=receivedDate}}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="grn">Store</label>
+                <div class="form-group">
+                  <select class="form-control" name="">
+                    <option>Choose Store</option>
+                    <option>Adama Steel</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                    <label for="receivedBy">Received By</label>
+                    <div class="form-group">
+                      {{ input id="receivedBy" type="text" class="form-control"  }}
+                    </div>
+               </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="requisitionNo">Requisition #</label>
+                  {{ input id="requisitionNo" type="text" class="form-control"  }}
+                </div>
+              <div class="col-md-4">
+                <label for="projectCode">Project</label>
+                <div class="form-group">
+                  <select class="form-control" name="">
+                    <option>Choose Store</option>
+                    <option>Adama Steel</option>
+                  </select>
+                </div>
+              </div>
+                <div class="col-md-4">
+                    <label for="siCode">SI Code(Donor)</label>
+                    <div class="form-group">
+                        <select class="form-control" name="">
+                            <option>Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+              <div class="row">
+                  <div class="col-md-3">
+                      <label for="region">Region</label>
+                      <div class="form-group">
+                        {{ input  type="select" class="form-control"  }}
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="zone">Zone</label>
+                      <div class="form-group">
+                        {{ input  type="select" class="form-control"  }}
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="woreda">Woreda</label>
+                      <div class="form-group">
+                        {{ input  type="select" class="form-control"  }}
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="fdp">FDP</label>
+                      <div class="form-group">
+                        {{ input  type="select" class="form-control"  }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+            <hr>
+
+            <h5>Receiving items</h5>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Commodity</th>
+                  <th>Batch</th>
+                  <th>UoM</th>
+                  <th>Quantity</th>
+                  <th>Waybill</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Wheat</td>
+                  <td>M####</td>
+                  <td>Mt</td>
+                  <td>250</td>
+                  <td>######</td>
+                </tr>
+
+                <tr>
+                  <td>Wheat</td>
+                  <td>M####</td>
+                  <td>Mt</td>
+                  <td>250</td>
+                  <td>######</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+
+            <h5>Transporter</h5>
+
+            <div class="row">
+
+
+              <div class="col-md-3">
+                <label for="transporter">Transporter</label>
+                <div class="form-group">
+                  {{ input  type="text" class="form-control"  }}
+                </div>
+              </div>
+                <div class="col-md-3">
+                    <label for="plateNo">Plate #</label>
+                    <div class="form-group">
+                      {{ input  type="text" class="form-control"  }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="trailerNo">Trailer plate #</label>
+                    <div class="form-group">
+                      {{ input  type="text" class="form-control"  }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="driverName">Driver's name</label>
+                    <div class="form-group">
+                      {{ input  type="text" class="form-control"  }}
+                    </div>
+                </div>
+            </div>
+
+
+              <div class="col-md-6">
+
+              </div>
+
+              <div class="col-md-6">
+                <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
+                <a href="#" class="btn btn-defails"><i class="fa fa-cancel"></i> Cancel</a>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+  {{/modal-dialog}}
+{{/if}}
+
+
+
+
+<div class="box">
+
+  <div class="box-body">
+
+
+    <div class="row">
+     <div class="col-xs-3">
+            <input class="form-control" placeholder="GIN" type="text">
+     </div>
+      <div class="col-xs-2">
+        <select class="form-control" name="">
+          <option>Choose Store</option>
+          <option>Adama Steel</option>
+        </select>
+      </div>
+      <div class="col-xs-2">
+
+          {{bootstrap-datepicker value=searchDate autoclose=true placeholder="Choose a date"}}
+
+      </div>
+      <div class="col-xs-1">
+        <a class="btn btn-default"><i class="fa fa-search"></i> Search</a>
+      </div>
+
+      <div class="col-xs-offset-3 col-xs-1">
+        <a class="btn btn-primary" onclick={{action 'toggleGinModalOpen'}}><i class="fa fa-plus"></i> Add</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="box">
+
+  <div class="box-body">
+    <table class="table table-bordered">
+      <tbody>
+
+
+      <tr>
+        <th style="width: 10px">#</th>
+        <th>GIN</th>
+        <th>Requisition No.</th>
+        <th>Dispatch Month</th>
+        <th>Region</th>
+        <th>Zone</th>
+        <th>Woreda</th>
+        <th>FDP</th>
+        <th>Dispatch Date</th>
+        <th>Store</th>
+        <th>Commodity</th>
+        <th>Quantity</th>
+        <th>UoM</th>
+        <th>Received by</th>
+        <th>Tasks</th>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- /.box-body -->
+  <div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="#">&laquo;</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ul>
+  </div>
+</div>
+<!-- /.box -->

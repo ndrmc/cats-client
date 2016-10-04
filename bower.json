@@ -10,6 +10,7 @@
     "font-awesome": "4.6.3",
     "pouchdb": "^5.4.5",
     "relational-pouch": "^1.4.4",
-    "pouchdb-find": "^0.10.2"
+    "pouchdb-find": "^0.10.2",
+    "bootstrap-datepicker": "^1.6.4"
   }
 }

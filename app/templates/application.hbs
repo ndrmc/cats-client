@@ -27,20 +27,19 @@
         </li>
 
 
-        {{#link-to "receive" tagName="li" class="treeview" href=false}}
+        {{#link-to "receive" tagName="li" class="treeview"}}
           <a {{bind-attr href="receive"}}>
             <i class="fa fa-download"></i>
             <span>Receive</span>
           </a>
         {{/link-to}}
 
-    
-
-        <li>
-          <a href="../widgets.html">
-            <i class="fa fa-send"></i> <span>Dispatch</span>
+        {{#link-to "dispatch" tagName="li" class="treeview"}}
+          <a {{bind-attr href="dispatch"}}>
+            <i class="fa fa-send"></i>
+            <span>Dispatch</span>
           </a>
-        </li>
+        {{/link-to}}
 
 
         <li class="header">SETTING</li>
