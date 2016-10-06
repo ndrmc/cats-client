@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('receive');
   this.route('dispatch');
+  this.route('newDispatch');
 });
 
 export default Router;

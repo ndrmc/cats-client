@@ -1,0 +1,191 @@
+{{#ember-wormhole to="page-header"}}
+    <h1>New Store Issue <small>GIN</small></h1>
+{{/ember-wormhole}}
+
+
+      <div>
+          <form {{action 'addDispatch' on='submit'}}>
+              <label for="gin">GIN</label>
+              <div class="form-group">
+                {{ input id="ginSearch" type="text" class="form-control"  }}
+              </div>
+
+              <hr>
+
+              <div class="row">
+                  <div class="col-md-4">
+                      <label for="dispatchDate">Dispatched Date</label>
+                      <div class="form-group">
+                        {{bootstrap-datepicker value=receivedDateSearch}}
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <label for="store">Store</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Choose Store</option>
+                              <option>Adama</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="storeKeeper">Store Keeper</label>
+                      <div class="form-group">
+                        {{ input id="storeKeeperSearch" type="text" class="form-control"  }}
+                      </div>
+                  </div>
+              </div>
+
+
+              <div class="row">
+                  <div class="col-md-4">
+                      <label for="requisitionNo">Requisition #</label>
+                    {{ input id="requisitionNo" type="text" class="form-control"  }}
+                  </div>
+                  <div class="col-md-4">
+                      <label for="projectCode">Project</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Choose Store</option>
+                              <option>Adama</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="siCode">SI Code(Donor)</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Select</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-3">
+                      <label for="region">Region</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Select</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="zone">Zone</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Select</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="woreda">Woreda</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Select</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <label for="fdp">FDP</label>
+                      <div class="form-group">
+                          <select class="form-control" name="">
+                              <option>Select</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="panel panel-default">
+
+                              <div class="panel-heading">Dispatch Items</div>
+
+                              <table class="table table-striped">
+                                  <thead>
+                                  <tr>
+                                      <th>Commodity Class</th>
+                                      <th>Commodity</th>
+                                      <th>Rounded Allocation MT</th>
+                                      <th>Total Units Dispatched</th>
+                                      <th>Quintal Dispatched</th>
+                                      <th>Dispatch MT</th>
+                                  </tr>
+                                  </thead>
+
+                                  <tbody>
+                                  <tr>
+                                      <td> {{ input id="commodityClass" type="select" class="form-control"  }}</td>
+                                      <td> {{ input id="commodity" type="select" class="form-control"  }}</td>
+                                      <td> {{ input id="roundedAllocationMT" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="quintalDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="dispatchMT" type="text" class="form-control"  }}</td>
+                                  </tr>
+                                  <tr>
+                                      <td> {{ input id="commodityClass" type="select" class="form-control"  }}</td>
+                                      <td> {{ input id="commodity" type="select" class="form-control"  }}</td>
+                                      <td> {{ input id="roundedAllocationMT" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="quintalDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input id="dispatchMT" type="text" class="form-control"  }}</td>
+                                  </tr>
+
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                      <div class="col-md-3">
+                          <label for="transporter">Transporter</label>
+                          <div class="form-group">
+                            {{ input  type="text" class="form-control"  }}
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <label for="plateNo">Plate #</label>
+                          <div class="form-group">
+                            {{ input  type="text" class="form-control"  }}
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <label for="trailerNo">Trailer plate #</label>
+                          <div class="form-group">
+                            {{ input  type="text" class="form-control"  }}
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <label for="driverName">Driver's name</label>
+                          <div class="form-group">
+                            {{ input  type="text" class="form-control"  }}
+                          </div>
+                      </div>
+                  </div>
+
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-6">
+
+                      </div>
+
+                      <div class="col-md-6">
+                          <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+                          <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
+                          <a href="#" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
+                      </div>
+                  </div>
+
+              </div>
+
+
+          </form>
+      </div>
+
+
+
