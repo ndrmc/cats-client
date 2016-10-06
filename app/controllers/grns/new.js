@@ -114,8 +114,7 @@ export default Ember.Controller.extend({
 
     },
 
-    createGRN: function() {
-
+    createGRN: function(nextAction) {
       this.initValidationErrors();
 
       var attrsThatCantBeBlank = [ 'grnNumber', 'donorId', 'receivedDate', 'storeId', 'projectId', 'receivedBy' ];
@@ -132,7 +131,7 @@ export default Ember.Controller.extend({
 
       if( this.get('grnItems').length === 0 ) {
         this.set('validationErrors.noItemsAddedError', true);
-        hasValidationErrors = true; 
+        hasValidationErrors = true;
       }
 
 
@@ -149,7 +148,7 @@ export default Ember.Controller.extend({
 
         grnRecord.save().then(() => {
           var grnItems = grnRecord.get('items').then(  (grnItems) => {
-            debugger;
+
             for (var i = 0; i < items.length; i++) {
               var grnItemRecord = this.store.createRecord( 'grnItem',items[i]);
 
@@ -169,12 +168,13 @@ export default Ember.Controller.extend({
 
             this.clearForm();
 
+            if( nextAction === 'REDIRECT') {
+              this.transitionToRoute('grns.list');
+            }
+
           });
 
         });
-
-
-
 
       }
     }

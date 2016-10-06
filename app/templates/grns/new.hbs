@@ -124,7 +124,7 @@
         <tr>
           <td>
             <div class="form-group  {{if grnItemValidationErrors.commodityId 'has-error' '' }}">
-              <select class="form-control"  onchange={{ action (mut grnItem.commodityId ) value='target.value' }} >
+              <select class="form-control" value={{grnItem.commodityId}}  onchange={{ action (mut grnItem.commodityId ) value='target.value' }} >
                 <option>Choose Commodity</option>
 
                 {{#each lookups.commodities as |commodity| }}
@@ -145,7 +145,7 @@
           </td>
           <td>
             <div class="form-group {{if grnItemValidationErrors.unitOfMeasure 'has-error' '' }}">
-              <select class="form-control"  onchange={{ action (mut grnItem.unitOfMeasure) value='target.value' }}>
+              <select class="form-control" value={{grnItem.unitOfMeasure}}  onchange={{ action (mut grnItem.unitOfMeasure) value='target.value' }}>
                 <option>Choose UoM</option>
 
                 {{#each [model.unitOfMeasures] as |uom| }}
@@ -265,9 +265,11 @@
       </div>
 
       <div class="col-md-6">
-        <a onclick={{ action "createGRN"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
-        <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
-        <a href="#" class="btn btn-defails"><i class="fa fa-cancel"></i> Cancel</a>
+        <a onclick={{ action "createGRN" "REDIRECT"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a onclick={{ action "createGRN" "STAY"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
+        {{#link-to  'grns.list'  class="btn btn-defails" }}
+          <i class="fa fa-cancel"></i> Cancel
+        {{/link-to}}
       </div>
     </div>
 
