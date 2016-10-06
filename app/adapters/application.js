@@ -5,7 +5,13 @@ PouchDB.debug.enable('*');
 
 var catsRemote = new PouchDB('http://localhost:5984/cats_remote');
 
-var catsLocal = new PouchDB('local_pouch');
+var catsLocal = new PouchDB('local_pouch',
+    {
+      ajax: {
+      cache: false
+      }
+    }
+  );
 
 catsLocal.sync(catsRemote, {
     live: true,

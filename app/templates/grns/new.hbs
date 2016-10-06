@@ -1,0 +1,279 @@
+{{#ember-wormhole to="page-header"}}
+  <h1>New GRN</h1>
+{{/ember-wormhole}}
+
+
+<div class="box">
+  <div class="box-body">
+  <form {{action 'addGoodReceipt' on='submit'}}>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">GRN *</label>
+        <div class="form-group {{if validationErrors.grnNumber 'has-error' '' }}">
+          {{ input value=grn.grnNumber id="grn" type="text" class="form-control"  autofocus="autofocus"  }}
+
+          <span class="help-block">{{ validationErrors.grnNumber }}</span>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Donor *</label>
+        <div class="form-group {{if validationErrors.donorId 'has-error' '' }}">
+          <select class="form-control" value={{grn.donorId}} onchange={{ action (mut grn.donorId) value='target.value' }}>
+            <option value="">Choose Donor</option>
+            {{#each lookups.donors as |donor| }}
+              <option value={{donor._id}}>{{donor.name}}</option>
+            {{/each}}
+          </select>
+
+          <span class="help-block">{{ validationErrors.donorId }}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">Received Date *</label>
+        <div class="form-group {{if validationErrors.receivedDate 'has-error' '' }}">
+          {{bootstrap-datepicker value=grn.receivedDate class="form-control"}}
+
+          <span class="help-block">{{ validationErrors.receivedDate }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Store *</label>
+        <div class="form-group {{if validationErrors.storeId 'has-error' '' }}">
+          <select class="form-control"  value={{grn.storeId}} onchange={{ action (mut grn.storeId) value='target.value' }}>
+            <option>Choose Store</option>
+            {{#each lookups.stores as |store| }}
+              <option value={{store._id}}>{{store.name}}</option>
+            {{/each}}
+          </select>
+
+          <span class="help-block">{{ validationErrors.storeId }}</span>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">Project *</label>
+        <div class="form-group {{if validationErrors.projectId 'has-error' '' }}">
+          <select class="form-control" value={{grn.projectId}} onchange={{ action (mut grn.projectId) value='target.value' }}>
+            <option>Choose Project</option>
+            {{#each lookups.projects as |project| }}
+              <option value={{project._id}}>{{project.name}}</option>
+            {{/each}}
+          </select>
+
+          <span class="help-block">{{ validationErrors.projectId }}</span>
+
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Received By *</label>
+        <div class="form-group  {{if validationErrors.receivedBy 'has-error' '' }}">
+          {{ input id="receivedBy" value=grn.receivedBy type="text" class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.receivedBy }}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <h5>Receiving items
+      {{#if validationErrors.noItemsAddedError }}
+        &middot; <span class="errorMessageText">Atleast one item should be added.</span>
+
+      {{/if}}
+    </h5>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Commodity</th>
+          <th>Batch</th>
+          <th>UoM</th>
+          <th>Quantity</th>
+          <th>Waybill</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {{#each grnItems as |grnItem| }}
+          <tr>
+            <td>{{grnItem.commodityId}}</td>
+            <td>{{grnItem.batchNumber}}</td>
+            <td>{{grnItem.unitOfMeasure}}</td>
+            <td>{{grnItem.quantity}}</td>
+            <td>{{grnItem.wayBill}}</td>
+            <td></td>
+          </tr>
+        {{/each}}
+
+        <tr>
+          <td>
+            <div class="form-group  {{if grnItemValidationErrors.commodityId 'has-error' '' }}">
+              <select class="form-control" value={{grnItem.commodityId}}  onchange={{ action (mut grnItem.commodityId ) value='target.value' }} >
+                <option>Choose Commodity</option>
+
+                {{#each lookups.commodities as |commodity| }}
+                  <option value={{commodity._id}}>{{commodity.name}}</option>
+                {{/each}}
+
+              </select>
+
+              <span class="help-block">{{grnItemValidationErrors.commodityId}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group {{if grnItemValidationErrors.batchNumber 'has-error' '' }}">
+              <input type="text" class="form-control" value={{grnItem.batchNumber}} oninput={{action (mut grnItem.batchNumber) value="target.value"}}>
+
+              <span class="help-block">{{grnItemValidationErrors.batchNumber}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group {{if grnItemValidationErrors.unitOfMeasure 'has-error' '' }}">
+              <select class="form-control" value={{grnItem.unitOfMeasure}}  onchange={{ action (mut grnItem.unitOfMeasure) value='target.value' }}>
+                <option>Choose UoM</option>
+
+                {{#each [model.unitOfMeasures] as |uom| }}
+                  <option value={{uom}}>{{uom}}</option>
+                {{/each}}
+
+              </select>
+              <span class="help-block">{{grnItemValidationErrors.unitOfMeasure}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group {{if grnItemValidationErrors.quantity 'has-error' '' }}">
+              <input class="form-control" type="number" value={{grnItem.quantity}} oninput={{action (mut grnItem.quantity) value="target.value"}}>
+
+              <span class="help-block">{{grnItemValidationErrors.quantity}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group {{if grnItemValidationErrors.wayBill 'has-error' '' }}">
+              <input type="text" value={{grnItem.wayBill}} oninput={{action (mut grnItem.wayBill) value="target.value"}} class="form-control"/>
+
+              <span class="help-block">{{grnItemValidationErrors.wayBill}}</span>
+
+            </div>
+          </td>
+          <td>
+
+            <button type="button" class="btn btn-primary" onclick={{ action 'createGRNItem'}}>Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h5>Transporter</h5>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">Weight Bridge #</label>
+        <div class="form-group   {{if validationErrors.weightBridge 'has-error' '' }}">
+          {{ input  type="text" value=grn.weightBridge class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.weightBridge }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Transporter</label>
+        <div class="form-group   {{if validationErrors.transporter 'has-error' '' }}">
+          {{ input  type="text" value=grn.transporter class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.transporter }}</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">Weight before unloading</label>
+        <div class="form-group   {{if validationErrors.transporter 'has-error' '' }}">
+          {{ input  type="number" value=grn.weightBeforeUnloading class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.weightBeforeUnloading }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Plate #</label>
+        <div class="form-group   {{if validationErrors.plateNumber 'has-error' '' }}">
+          {{ input  type="text" value=grn.plateNumber class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.plateNumber }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="grn">Weight after unloading</label>
+        <div class="form-group  {{if validationErrors.weightAfterUnloading 'has-error' '' }}">
+          {{ input  type="text" value=grn.weightAfterUnloading class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.weightAfterUnloading }}</span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Trailer plate #</label>
+        <div class="form-group  {{if validationErrors.trailerPlate 'has-error' '' }}">
+          {{ input  type="text" value=grn.trailerPlate class="form-control"  }}
+
+          <span class="help-block">{{ validationErrors.trailerPlate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+
+      </div>
+
+      <div class="col-md-6">
+        <label for="grn">Driver's name</label>
+        <div class="form-group  {{if validationErrors.driverName 'has-error' '' }}">
+          {{ input  type="text" class="form-control" value=grn.driverName  }}
+
+          <span class="help-block">{{ validationErrors.driverName }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+
+      </div>
+
+      <div class="col-md-6">
+        <a onclick={{ action "createGRN" "REDIRECT"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a onclick={{ action "createGRN" "STAY"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
+        {{#link-to  'grns.list'  class="btn btn-defails" }}
+          <i class="fa fa-cancel"></i> Cancel
+        {{/link-to}}
+      </div>
+    </div>
+
+
+  </form>
+  </div>
+</div>
