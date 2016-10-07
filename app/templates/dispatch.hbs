@@ -1,13 +1,13 @@
 {{#ember-wormhole to="page-header"}}
-  <h1>Store Issue <small>GIN</small></h1>
+<h1>Store Issue <small>GIN</small></h1>
 {{/ember-wormhole}}
 
 <div class="box">
   <div class="box-body">
     <div class="row">
-     <div class="col-xs-3">
-            <input class="form-control" placeholder="GIN" type="text">
-     </div>
+      <div class="col-xs-3">
+        <input class="form-control" placeholder="GIN" type="text">
+      </div>
       <div class="col-xs-2">
         <select class="form-control" name="">
           <option>Choose Store</option>
@@ -15,14 +15,14 @@
         </select>
       </div>
       <div class="col-xs-2">
-          {{bootstrap-datepicker value=searchDate autoclose=true placeholder="Choose a date"}}
+        {{bootstrap-datepicker value=searchDate autoclose=true placeholder="Choose a date"}}
       </div>
       <div class="col-xs-1">
         <a class="btn btn-default"><i class="fa fa-search"></i> Search</a>
       </div>
 
       <div class="col-xs-offset-3 col-xs-1">
-         {{#link-to "newDispatch" class="treeview"}}<i class="fa fa-plus"></i> Add{{/link-to}}
+        {{#link-to "newDispatch" class="btn btn-primary"}}<i class="fa fa-plus"></i> Add{{/link-to}}
       </div>
     </div>
 
@@ -36,43 +36,43 @@
   <div class="box-body">
     <table class="table table-bordered">
       <tbody>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>GIN</th>
+          <th>Requisition No.</th>
+          <th>Dispatch Month</th>
+          <th>Region</th>
+          <th>Zone</th>
+          <th>Woreda</th>
+          <th>FDP</th>
+          <th>Dispatch Date</th>
+          <th>Store</th>
+          <th>Commodity</th>
+          <th>Quantity</th>
+          <th>UoM</th>
+          <th>Received by</th>
+          <th>Tasks</th>
+        </tr>
 
+        {{#each model as |dispatch|}}
+        <tr>
+          <td>{{dispatch.gin}}</td>
+          <td>{{dispatch.requisitionNo}}</td>
+          <td>{{dispatch.dispatchMonth}}</td>
+          <td>{{dispatch.region}}</td>
+          <td>{{dispatch.zone}}</td>
+          <td>{{dispatch.woreda}}</td>
+          <td>{{dispatch.fdp}}</td>
+          <td>{{dispatch.dispatchDate}}</td>
+          <td>{{dispatch.store}}</td>
+          <td>{{dispatch.commodity}}</td>
+          <td>{{dispatch.quantity}}</td>
+          <td>{{dispatch.UOM}}</td>
+          <td>{{dispatch.receivedBY}}</td>
+          <td></td>
+        </tr>
+        {{/each}}
 
-      <tr>
-        <th style="width: 10px">#</th>
-        <th>GIN</th>
-        <th>Requisition No.</th>
-        <th>Dispatch Month</th>
-        <th>Region</th>
-        <th>Zone</th>
-        <th>Woreda</th>
-        <th>FDP</th>
-        <th>Dispatch Date</th>
-        <th>Store</th>
-        <th>Commodity</th>
-        <th>Quantity</th>
-        <th>UoM</th>
-        <th>Received by</th>
-        <th>Tasks</th>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
 
 
       </tbody>

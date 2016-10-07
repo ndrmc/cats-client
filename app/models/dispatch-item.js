@@ -6,6 +6,6 @@ export default DS.Model.extend({
   roundedAllocationMT: DS.attr('number'),
   totalUnitsDispatched: DS.attr('number'),
   quintalDispatched: DS.attr('number'),
-  dispatchMT: DS.attr('number')
-
+  dispatchMT: DS.attr('number'),
+  rev: DS.attr('string')
 });

@@ -4,7 +4,7 @@
                   <div class="col-md-6">
                       <label for="gin">GIN</label>
                       <div class="form-group">
-                        {{ input id="ginSearch" type="text" class="form-control"  }}
+                        {{ input value= dispatch.gin id="ginSearch" type="text" class="form-control"  }}
                       </div>
                   </div>
 
@@ -15,14 +15,14 @@
                   <div class="col-md-4">
                       <label for="dispatchDate">Dispatched Date</label>
                       <div class="form-group">
-                        {{bootstrap-datepicker value=receivedDateSearch}}
+                        {{bootstrap-datepicker value=dispatch.dispatchDate}}
                       </div>
                   </div>
 
                   <div class="col-md-4">
                       <label for="store">Store</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value= dispatch.store name="">
                               <option>Choose Store</option>
                               <option>Adama</option>
                           </select>
@@ -31,7 +31,7 @@
                   <div class="col-md-4">
                       <label for="storeKeeper">Store Keeper</label>
                       <div class="form-group">
-                        {{ input id="storeKeeperSearch" type="text" class="form-control"  }}
+                        {{ input value=dispatch.storeKeeper id="storeKeeper" type="text" class="form-control"  }}
                       </div>
                   </div>
               </div>
@@ -40,12 +40,12 @@
               <div class="row">
                   <div class="col-md-4">
                       <label for="requisitionNo">Requisition #</label>
-                    {{ input id="requisitionNo" type="text" class="form-control"  }}
+                    {{ input value=dispatch.requisitionNo id="requisitionNo" type="text" class="form-control"  }}
                   </div>
                   <div class="col-md-4">
                       <label for="projectCode">Project</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.projectCode name="">
                               <option>Choose Store</option>
                               <option>Adama</option>
                           </select>
@@ -54,7 +54,7 @@
                   <div class="col-md-4">
                       <label for="siCode">SI Code(Donor)</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.siCode name="">
                               <option>Select</option>
                           </select>
                       </div>
@@ -64,7 +64,7 @@
                   <div class="col-md-3">
                       <label for="region">Region</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.region name="">
                               <option>Select</option>
                           </select>
                       </div>
@@ -72,7 +72,7 @@
                   <div class="col-md-3">
                       <label for="zone">Zone</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.zone name="">
                               <option>Select</option>
                           </select>
                       </div>
@@ -80,7 +80,7 @@
                   <div class="col-md-3">
                       <label for="woreda">Woreda</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.woreda name="">
                               <option>Select</option>
                           </select>
                       </div>
@@ -88,7 +88,7 @@
                   <div class="col-md-3">
                       <label for="fdp">FDP</label>
                       <div class="form-group">
-                          <select class="form-control" name="">
+                          <select class="form-control" value=dispatch.fdp name="">
                               <option>Select</option>
                           </select>
                       </div>
@@ -115,22 +115,31 @@
                                   </thead>
 
                                   <tbody>
+                                  {{#each items as |item| }}
                                   <tr>
-                                      <td> {{ input id="commodityClass" type="select" class="form-control"  }}</td>
-                                      <td> {{ input id="commodity" type="select" class="form-control"  }}</td>
-                                      <td> {{ input id="roundedAllocationMT" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="quintalDispatched" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="dispatchMT" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.commodityClass id="commodityClass" type="select" class="form-control"  }}</td>
+                                      <td> {{ input value=item.commodity id="commodity" type="select" class="form-control"  }}</td>
+                                      <td> {{ input value=item.roundedAllocationMT id="roundedAllocationMT" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.totalUnitsDispatched id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.quintalDispatched id="quintalDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.dispatchMT id="dispatchMT" type="text" class="form-control"  }}</td>
                                   </tr>
+                                    {{/each}}
                                   <tr>
-                                      <td> {{ input id="commodityClass" type="select" class="form-control"  }}</td>
-                                      <td> {{ input id="commodity" type="select" class="form-control"  }}</td>
-                                      <td> {{ input id="roundedAllocationMT" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="quintalDispatched" type="text" class="form-control"  }}</td>
-                                      <td> {{ input id="dispatchMT" type="text" class="form-control"  }}</td>
+
+                                      <td> {{ input value=item.commodityClass id="commodityClass" type="select" class="form-control"  }}</td>
+                                      <td> {{ input value=item.commodity id="commodity" type="select" class="form-control"  }}</td>
+                                      <td> {{ input value=item.roundedAllocationMT id="roundedAllocationMT" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.totalUnitsDispatched id="totalUnitsDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.quintalDispatched id="quintalDispatched" type="text" class="form-control"  }}</td>
+                                      <td> {{ input value=item.dispatchMT id="dispatchMT" type="text" class="form-control"  }}</td>
+
+                                      <td>
+                                        <button type="button" class="btn btn-primary" >Add</button>
+                                      </td>
+
                                   </tr>
+
 
                                   </tbody>
                               </table>
@@ -144,25 +153,25 @@
                       <div class="col-md-3">
                           <label for="transporter">Transporter</label>
                           <div class="form-group">
-                            {{ input  type="text" class="form-control"  }}
+                            {{ input value=dispatch.transporter  type="text" class="form-control"  }}
                           </div>
                       </div>
                       <div class="col-md-3">
                           <label for="plateNo">Plate #</label>
                           <div class="form-group">
-                            {{ input  type="text" class="form-control"  }}
+                            {{ input value=dispatch.plateNo type="text" class="form-control"  }}
                           </div>
                       </div>
                       <div class="col-md-3">
                           <label for="trailerNo">Trailer plate #</label>
                           <div class="form-group">
-                            {{ input  type="text" class="form-control"  }}
+                            {{ input value=dispatch.trailerNo type="text" class="form-control"  }}
                           </div>
                       </div>
                       <div class="col-md-3">
                           <label for="driverName">Driver's name</label>
                           <div class="form-group">
-                            {{ input  type="text" class="form-control"  }}
+                            {{ input value=dispatch.driverName type="text" class="form-control"  }}
                           </div>
                       </div>
                   </div>
@@ -174,9 +183,9 @@
                       </div>
 
                       <div class="col-md-6">
-                          <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
-                          <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
-                          <a href="#" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
+                          <a onclick={{ action "createDispatch" "REDIRECT"}} class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+                          <a onclick={{ action "createDispatch" "STAY"}} class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
+                          <a href="/dispatch" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
                       </div>
                   </div>
 
@@ -185,6 +194,3 @@
 
           </form>
       </div>
-
-
-
