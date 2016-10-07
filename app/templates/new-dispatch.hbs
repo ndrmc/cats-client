@@ -1,15 +1,14 @@
-{{#ember-wormhole to="page-header"}}
-    <h1>New Store Issue <small>GIN</small></h1>
-{{/ember-wormhole}}
-
-
       <div>
           <form {{action 'addDispatch' on='submit'}}>
-              <label for="gin">GIN</label>
-              <div class="form-group">
-                {{ input id="ginSearch" type="text" class="form-control"  }}
-              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <label for="gin">GIN</label>
+                      <div class="form-group">
+                        {{ input id="ginSearch" type="text" class="form-control"  }}
+                      </div>
+                  </div>
 
+              </div>
               <hr>
 
               <div class="row">

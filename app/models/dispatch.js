@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-
+import { hasMany } from 'ember-data/relationships';
 export default DS.Model.extend({
     gin: DS.attr('number'),
     requisitionNo: DS.attr('number'),
@@ -14,16 +14,11 @@ export default DS.Model.extend({
     dispatchDate: DS.attr('date'),
     projectCode: DS.attr('string'),
     siCode: DS.attr('string'),
-    commodityClass: DS.attr('string'),
-    commodityType: DS.attr('string'),
-    roundedAllocationMT: DS.attr('number'),
-    totalUnitsDispatched: DS.attr('number'),
-    quintalDispatched: DS.attr('number'),
-    dispatchMT: DS.attr('number'),
     balance: DS.attr('number'),
     allocationPeriod: DS.attr('string'),
     storeKeeper: DS.attr('string'),
     enteredBy: DS.attr('string'),
+    items:hasMany('dispatch-item'),
     rev: DS.attr('string')
 
 });
