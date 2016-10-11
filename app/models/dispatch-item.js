@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { belongsTo } from 'ember-data/relationships';
 
 export default DS.Model.extend({
   commodityClass: DS.attr('string'),
@@ -7,5 +8,6 @@ export default DS.Model.extend({
   totalUnitsDispatched: DS.attr('number'),
   quintalDispatched: DS.attr('number'),
   dispatchMT: DS.attr('number'),
+  dispatch: belongsTo('dispatch'),
   rev: DS.attr('string')
 });
