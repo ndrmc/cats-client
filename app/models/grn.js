@@ -1,13 +1,13 @@
 import DS from 'ember-data';
-import { hasMany } from 'ember-data/relationships';
+import { hasMany, belongsTo } from 'ember-data/relationships';
 import { Model } from 'ember-pouch';
 
 export default Model.extend({
     grnNumber: DS.attr('string'),
-    donorId: DS.attr('string'),
+    donor: belongsTo('donor'),
     receivedDate: DS.attr('date'),
-    projectId: DS.attr('string'),
-    storeId: DS.attr('string'),
+    project: belongsTo('project'),
+    store_: belongsTo('store'),
     receivedBy: DS.attr('string'),
     submittedBy: DS.attr('string'),
     weightBridge: DS.attr('string'),
@@ -18,5 +18,5 @@ export default Model.extend({
     trailerPlate: DS.attr('string'),
     driverName: DS.attr('string'),
 
-    items: hasMany('grnItem', { inverse: 'grn' })
+    items: hasMany('grn-item')
 });

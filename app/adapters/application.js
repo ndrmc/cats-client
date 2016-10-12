@@ -1,23 +1,32 @@
-import PouchDB from 'pouchdb';
 import { Adapter } from 'ember-pouch';
+import PouchDB from 'pouchdb';
+import config from 'cats-client/config/environment';
+import Ember from 'ember';
 
-PouchDB.debug.enable('*');
+const { assert, isEmpty } = Ember;
 
-var catsRemote = new PouchDB('http://localhost:5984/cats_remote');
+function createDb() {
+  let localDb = config.emberPouch.localDb;
 
-var catsLocal = new PouchDB('local_pouch',
-    {
-      ajax: {
-      cache: false
-      }
-    }
-  );
+  assert('emberPouch.localDb must be set', !isEmpty(localDb));
 
-catsLocal.sync(catsRemote, {
-    live: true,
-    retry: true
-});
+  let db = new PouchDB(localDb);
+
+  if (config.emberPouch.remoteDb) {
+    let remoteDb = new PouchDB(config.emberPouch.remoteDb);
+
+    db.sync(remoteDb, {
+      live: true,
+      retry: true
+    });
+  }
+
+  return db;
+}
 
 export default Adapter.extend({
-    db: catsLocal
+  init() {
+    this._super(...arguments);
+    this.set('db', createDb());
+  }
 });

@@ -5,10 +5,10 @@ import { UOM_MT, UOM_KG } from '../../config/consts';
 
 var grnTemplate = {
   grnNumber: "",
-  donorId: "",
+  donor: "",
   receivedDate: "",
-  projectId: "",
-  storeId: "",
+  project: "",
+  store_: "",
   weightBridge: "",
   transporter: "",
   weightBeforeUnloading: "",
@@ -21,7 +21,7 @@ var grnTemplate = {
 };
 
 var newGrnItemProto = {
-  commodityId: null,
+  commodity: null,
   batchNumber: "",
   unitOfMeasure: "",
   quantity: null,
@@ -47,11 +47,12 @@ export default Ember.Controller.extend({
   initGrnItem: function () {
     this.set( 'grnItem',
       {
-        commodityId: null,
+        commodity: null,
         batchNumber: "",
         unitOfMeasure: "",
         quantity: null,
-        wayBill: ""
+        wayBill: "",
+        grn: null
       }
     );
   },
@@ -59,7 +60,7 @@ export default Ember.Controller.extend({
   initGrnItemValidationErrors: function () {
     this.set( 'grnItemValidationErrors',
       {
-        commodityId: null,
+        commodity: null,
         batchNumber: "",
         unitOfMeasure: "",
         quantity: null,
@@ -76,20 +77,43 @@ export default Ember.Controller.extend({
     this.set("validationErrors", Object.assign( {}, grnTemplate, { noItemsAddedError: false}));
   },
 
-  lookups: {
-    donors: [{ _id: '1', name: "Ethiopian Government"}],
-    stores: [{ _id: '1', name: "Adama"}],
-    projects: [{ _id: '1', name: "Project 1"}],
-    commodities: [{ _id: '1', name: "Wheat"}]
-  },
 
 
   actions: {
 
+    changeSelect: function( newValueEvt ) {
+        var newValue = newValueEvt.target.value;
+        var selectName = newValueEvt.target.name;
+
+        switch (selectName) {
+          case "donor":
+            this.set('grn.donor', this.store.peekRecord('donor', newValue));
+            break;
+
+          case "project":
+            this.set('grn.project', this.store.peekRecord('project', newValue));
+            break;
+
+          case "store":
+            this.set('grn.store_', this.store.peekRecord('store', newValue));
+            break;
+
+          case "commodity":
+            this.set('grnItem.commodity', this.store.peekRecord('commodity', newValue));
+            break;
+
+          default:
+
+        }
+
+        console.log( this.get('grn'));
+    },
+
+
     createGRNItem: function() {
       this.initGrnItemValidationErrors();
 
-      var attrsThatCantBeBlank = [ 'commodityId', 'quantity', /* 'batchNumber', */ 'unitOfMeasure', 'wayBill' ];
+      var attrsThatCantBeBlank = [ 'commodity'];//, 'quantity', /* 'batchNumber', */ 'unitOfMeasure', 'wayBill' ];
 
       var hasValidationErrors = false;
 
@@ -117,7 +141,7 @@ export default Ember.Controller.extend({
     createGRN: function(nextAction) {
       this.initValidationErrors();
 
-      var attrsThatCantBeBlank = [ 'grnNumber', 'donorId', 'receivedDate', 'storeId', 'projectId', 'receivedBy' ];
+      var attrsThatCantBeBlank = [ 'grnNumber'];//, 'donor', 'receivedDate', 'store_', 'project', 'receivedBy' ];
 
       var hasValidationErrors = false;
 
@@ -144,38 +168,56 @@ export default Ember.Controller.extend({
 
         var itemsPromises = [];
 
-        var grnRecord = this.store.createRecord( 'grn', this.get('grn'));
+        var grnRecord = this.store.createRecord('grn', this.get('grn'));
 
         grnRecord.save().then(() => {
-          var grnItems = grnRecord.get('items').then(  (grnItems) => {
 
-            for (var i = 0; i < items.length; i++) {
-              var grnItemRecord = this.store.createRecord( 'grnItem',items[i]);
+            grnRecord.get('items').then( (grnItems) => {
 
-              grnItems.pushObject(grnItemRecord);
+              for(var i = 0; i < items.length; i++) {
 
-              itemsPromises.push( grnItemRecord.save());
-            }
+                Ember.set( items[i],  'grn', this.store.peekRecord('grn', grnRecord.id));
+
+                debugger;
 
 
-            Ember.RSVP.all( itemsPromises).then( function() {
+                var grnItemRecord = this.store.createRecord( 'grn-item', items[i]);
 
-                console.log("Resaving the GRN");
 
-                this.store.createRecord( 'grn', this.get('grn')).save();
+                console.log( "grnRecord.id", grnRecord.id);
+
+
+                grnItems.pushObject(grnItemRecord);
+
+                var grnItemPromise = grnItemRecord.save();
+
+                grnItemPromise.then(() => console.log( "grnItemPromise", grnItemRecord ));
+
+                itemsPromises.push( grnItemPromise );
               }
-            ).catch(() => console.log('saving grn failed!'));
 
-            this.clearForm();
+              Ember.RSVP.all( itemsPromises).then( function() {
 
-            if( nextAction === 'REDIRECT') {
-              this.transitionToRoute('grns.list');
+                  console.log("Resaving the GRN");
+
+                  grnRecord.save().then(
+                    () => {
+                      grnRecord.get('items').then((items) => { console.log("Items!!", items);});
+
+                    }
+                  );
+                }
+              ).catch(() => console.log('saving grn failed!'));
+
+              //this.clearForm();
+
+              if( nextAction === 'REDIRECT') {
+                this.transitionToRoute('grns.list');
+              }
             }
+            );
 
           });
-
-        });
-
       }
     }
   }

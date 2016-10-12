@@ -21,10 +21,10 @@
       <div class="col-md-6">
         <label for="grn">Donor *</label>
         <div class="form-group {{if validationErrors.donorId 'has-error' '' }}">
-          <select class="form-control" value={{grn.donorId}} onchange={{ action (mut grn.donorId) value='target.value' }}>
+          <select class="form-control" value={{if grn.donor grn.donor.id ''}} onchange={{ action "changeSelect"}} name="donor">
             <option value="">Choose Donor</option>
-            {{#each lookups.donors as |donor| }}
-              <option value={{donor._id}}>{{donor.name}}</option>
+            {{#each model.donors as |donor| }}
+              <option value={{donor.id}}>{{donor.name}}</option>
             {{/each}}
           </select>
 
@@ -48,10 +48,10 @@
       <div class="col-md-6">
         <label for="grn">Store *</label>
         <div class="form-group {{if validationErrors.storeId 'has-error' '' }}">
-          <select class="form-control"  value={{grn.storeId}} onchange={{ action (mut grn.storeId) value='target.value' }}>
-            <option>Choose Store</option>
-            {{#each lookups.stores as |store| }}
-              <option value={{store._id}}>{{store.name}}</option>
+          <select class="form-control" value={{if grn.site grn.site.id ''}} onchange={{ action "changeSelect"}} name="store">
+            <option value="">Choose Store</option>
+            {{#each model.stores as |store| }}
+              <option value={{store.id}}>{{store.name}}</option>
             {{/each}}
           </select>
 
@@ -66,10 +66,10 @@
       <div class="col-md-6">
         <label for="grn">Project *</label>
         <div class="form-group {{if validationErrors.projectId 'has-error' '' }}">
-          <select class="form-control" value={{grn.projectId}} onchange={{ action (mut grn.projectId) value='target.value' }}>
-            <option>Choose Project</option>
-            {{#each lookups.projects as |project| }}
-              <option value={{project._id}}>{{project.name}}</option>
+          <select class="form-control" value={{if grn.project grn.project.id ''}} onchange={{ action "changeSelect"}} name="project">
+            <option value="">Choose Project</option>
+            {{#each model.projects as |project| }}
+              <option value={{project.id}}>{{project.name}}</option>
             {{/each}}
           </select>
 
@@ -112,7 +112,7 @@
 
         {{#each grnItems as |grnItem| }}
           <tr>
-            <td>{{grnItem.commodityId}}</td>
+            <td>{{grnItem.commodity.name}}</td>
             <td>{{grnItem.batchNumber}}</td>
             <td>{{grnItem.unitOfMeasure}}</td>
             <td>{{grnItem.quantity}}</td>
@@ -124,11 +124,11 @@
         <tr>
           <td>
             <div class="form-group  {{if grnItemValidationErrors.commodityId 'has-error' '' }}">
-              <select class="form-control" value={{grnItem.commodityId}}  onchange={{ action (mut grnItem.commodityId ) value='target.value' }} >
-                <option>Choose Commodity</option>
+              <select class="form-control" value={{if grnItem.donor grnItem.commodity.id ''}} onchange={{ action "changeSelect"}} name="commodity">
+                <option value="">Choose Commodity</option>
 
-                {{#each lookups.commodities as |commodity| }}
-                  <option value={{commodity._id}}>{{commodity.name}}</option>
+                {{#each model.commodities as |commodity| }}
+                  <option value={{commodity.id}}>{{commodity.name}}</option>
                 {{/each}}
 
               </select>
