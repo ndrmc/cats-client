@@ -12,10 +12,11 @@
         <div class="col-md-4">
             <label for="projectCode">Project</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.projectCode name="">
-                    <option>Choose Store</option>
-                    <option>Adama</option>
-                </select>
+              <select class="form-control" value={{dispatch.projectCode}} onchange={{action (mut dispatch.projectCode) value="target.value"}}>
+                {{#each projects as |project|}}
+                  <option value={{project}}>{{project}}</option>
+                  {{/each}}
+              </select>
             </div>
         </div>
         <div class="col-md-4">
@@ -41,11 +42,10 @@
         <div class="col-md-6">
             <label for="dispatchMonth">Dispatch Month</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.dispatchMonth name="">
-                    <option>--</option>
-                    <option>January</option>
-                    <option>February</option>
-                    <option>March</option>
+                <select class="form-control" value={{dispatch.dispatchMonth}} onchange={{action (mut dispatch.dispatchMonth) value="target.value"}}>
+                  {{#each months as |month|}}
+                    <option value={{month}}>{{month}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>
@@ -55,10 +55,11 @@
         <div class="col-md-6">
             <label for="store">Store</label>
             <div class="form-group">
-                <select class="form-control" value= dispatch.store name="">
-                    <option>Choose Store</option>
-                    <option>Adama</option>
-                </select>
+              <select class="form-control" value={{dispatch._store}} onchange={{action (mut dispatch._store) value="target.value"}}>
+                {{#each _stores as |_store|}}
+                  <option value={{_store}}>{{_store}}</option>
+                  {{/each}}
+              </select>
             </div>
         </div>
         <div class="col-md-6">
@@ -72,17 +73,23 @@
         <div class="col-md-6">
             <label for="region">Region</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.region name="">
-                    <option>Select</option>
+                <select class="form-control" value={{dispatch.region}} onchange={{action (mut dispatch.region) value="target.value"}}>
+                  <option value="">--select region--</option>
+                  {{#each model.regions as |region|}}
+                    <option value={{region.name}}>{{region.name}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>
         <div class="col-md-6">
             <label for="zone">Zone</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.zone name="">
-                    <option>Select</option>
-                </select>
+              <select class="form-control" value={{dispatch.zone}} onchange={{action (mut dispatch.zone) value="target.value"}}>
+                  <option value="">--select zone--</option>
+                {{#each model.zones as |zone|}}
+                  <option value={{zone.name}}>{{zone.name}}</option>
+                  {{/each}}
+              </select>
             </div>
         </div>
       </div>
@@ -90,17 +97,23 @@
         <div class="col-md-6">
             <label for="woreda">Woreda</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.woreda name="">
-                    <option>Select</option>
-                </select>
+              <select class="form-control" value={{dispatch.woreda}} onchange={{action (mut dispatch.woreda) value="target.value"}}>
+                <option value="">--select woreda--</option>
+                {{#each model.woredas as |woreda|}}
+                  <option value={{woreda.name}}>{{woreda.name}}</option>
+                  {{/each}}
+              </select>
             </div>
         </div>
         <div class="col-md-6">
             <label for="fdp">FDP</label>
             <div class="form-group">
-                <select class="form-control" value=dispatch.fdp name="">
-                    <option>Select</option>
-                </select>
+              <select class="form-control" value={{dispatch.fdp}} onchange={{action (mut dispatch.fdp) value="target.value"}}>
+                <option value="">--select fdp--</option>
+                {{#each model.fdps as |fdp|}}
+                  <option value={{fdp.name}}>{{fdp.name}}</option>
+                  {{/each}}
+              </select>
             </div>
         </div>
       </div>
@@ -203,8 +216,8 @@
           </div>
 
           <div class="col-md-6">
-              <a onclick={{ action "createDispatch" "REDIRECT"}} class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
-              <a onclick={{ action "createDispatch" "STAY"}} class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
+              <a href="/dispatch" onclick={{ action "createDispatch" }} class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+              <a href="#" onclick={{ action "createDispatch" "clearForm"}} class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
               <a href="/dispatch" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
           </div>
       </div>

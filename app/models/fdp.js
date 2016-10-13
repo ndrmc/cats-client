@@ -2,5 +2,6 @@ import DS from 'ember-data';
 import { belongsTo } from 'ember-data/relationships';
 export default DS.Model.extend({
 	name:DS.attr('string'),
-	woreds:belongsTo('woreda')
+	woreda:belongsTo('woreda'),
+	rev:DS.attr('string')
 });

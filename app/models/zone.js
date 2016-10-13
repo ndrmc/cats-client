@@ -5,6 +5,7 @@ import { belongsTo } from 'ember-data/relationships';
 export default DS.Model.extend({
 	name: DS.attr('string'),
 	woredas:hasMany('woreda'),
-	region:belongsTo('region')
+	region:belongsTo('region'),
+	rev:DS.attr('string')
 
 });

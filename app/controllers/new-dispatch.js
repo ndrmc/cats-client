@@ -4,6 +4,10 @@ export default Ember.Controller.extend({
   dispatch:{},
   dispatchItem:{},
   dispatchItems:[],
+  months:['--select month--','January','February','March','April','May','June','July','August','September','October','November','December'],
+  _stores:['--select store--','Adama steel','Adama'],
+  projects:['--Choose Project--','Government/200,000','WFP/100,000'],
+
   initDispatchItem:function(){
     this.set('dispatchItem',{
       commodityClass: null,
@@ -30,6 +34,9 @@ export default Ember.Controller.extend({
   addDispatchItem: function(){
     this.get('dispatchItems').pushObject(this.get('dispatchItem'));
     this.initDispatchItem();
+  },
+  clearForm:function(){
+
   }
 }
 

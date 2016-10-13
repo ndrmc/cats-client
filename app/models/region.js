@@ -3,5 +3,6 @@ import { hasMany } from 'ember-data/relationships';
 
 export default DS.Model.extend({
   name:DS.attr('string'),
-  zones: hasMany('zone')
+  zones: hasMany('zone'),
+  rev:DS.attr('string')
 });

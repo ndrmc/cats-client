@@ -5,5 +5,6 @@ import { belongsTo } from 'ember-data/relationships';
 export default DS.Model.extend({
 	name: DS.attr('string'),
 	fdps:hasMany('fdp'),
-	zone:belongsTo('zone')
+	zone:belongsTo('zone'),
+	rev:DS.attr('string')
 });
