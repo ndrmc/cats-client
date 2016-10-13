@@ -16,7 +16,6 @@ var grnTemplate = {
   plateNumber: "",
   trailerPlate: "",
   driverName: "",
-
   items: []
 };
 
