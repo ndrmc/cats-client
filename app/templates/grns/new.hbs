@@ -47,15 +47,15 @@
 
       <div class="col-md-6">
         <label for="grn">Store *</label>
-        <div class="form-group {{if validationErrors.storeId 'has-error' '' }}">
-          <select class="form-control" value={{if grn.site grn.site.id ''}} onchange={{ action "changeSelect"}} name="store">
+        <div class="form-group {{if validationErrors.store_ 'has-error' '' }}">
+          <select class="form-control" value={{if grn.store_ grn.store_.id ''}} onchange={{ action "changeSelect"}} name="store">
             <option value="">Choose Store</option>
             {{#each model.stores as |store| }}
               <option value={{store.id}}>{{store.name}}</option>
             {{/each}}
           </select>
 
-          <span class="help-block">{{ validationErrors.storeId }}</span>
+          <span class="help-block">{{ validationErrors.store_ }}</span>
 
         </div>
       </div>
@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-md-6">
         <label for="grn">Project *</label>
-        <div class="form-group {{if validationErrors.projectId 'has-error' '' }}">
+        <div class="form-group {{if validationErrors.project 'has-error' '' }}">
           <select class="form-control" value={{if grn.project grn.project.id ''}} onchange={{ action "changeSelect"}} name="project">
             <option value="">Choose Project</option>
             {{#each model.projects as |project| }}
@@ -73,7 +73,7 @@
             {{/each}}
           </select>
 
-          <span class="help-block">{{ validationErrors.projectId }}</span>
+          <span class="help-block">{{ validationErrors.project }}</span>
 
         </div>
       </div>

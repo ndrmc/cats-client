@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
   initGrnItem: function () {
     this.set( 'grnItem',
       {
-        commodity: null,
+        commodity: "",
         batchNumber: "",
         unitOfMeasure: "",
         quantity: null,
@@ -106,14 +106,14 @@ export default Ember.Controller.extend({
 
         }
 
-        console.log( this.get('grn'));
+
     },
 
 
     createGRNItem: function() {
       this.initGrnItemValidationErrors();
 
-      var attrsThatCantBeBlank = [ 'commodity'];//, 'quantity', /* 'batchNumber', */ 'unitOfMeasure', 'wayBill' ];
+      var attrsThatCantBeBlank = [ 'commodity', 'quantity', /* 'batchNumber', */ 'unitOfMeasure', 'wayBill' ];
 
       var hasValidationErrors = false;
 
@@ -139,9 +139,12 @@ export default Ember.Controller.extend({
     },
 
     createGRN: function(nextAction) {
+
+      debugger;
+
       this.initValidationErrors();
 
-      var attrsThatCantBeBlank = [ 'grnNumber'];//, 'donor', 'receivedDate', 'store_', 'project', 'receivedBy' ];
+      var attrsThatCantBeBlank = [ 'grnNumber', 'donor', 'receivedDate', 'store_', 'project', 'receivedBy' ];
 
       var hasValidationErrors = false;
 
@@ -178,38 +181,23 @@ export default Ember.Controller.extend({
 
                 Ember.set( items[i],  'grn', this.store.peekRecord('grn', grnRecord.id));
 
-                debugger;
-
-
                 var grnItemRecord = this.store.createRecord( 'grn-item', items[i]);
-
-
-                console.log( "grnRecord.id", grnRecord.id);
-
 
                 grnItems.pushObject(grnItemRecord);
 
                 var grnItemPromise = grnItemRecord.save();
 
-                grnItemPromise.then(() => console.log( "grnItemPromise", grnItemRecord ));
-
                 itemsPromises.push( grnItemPromise );
               }
 
               Ember.RSVP.all( itemsPromises).then( function() {
-
-                  console.log("Resaving the GRN");
-
-                  grnRecord.save().then(
-                    () => {
-                      grnRecord.get('items').then((items) => { console.log("Items!!", items);});
-
-                    }
-                  );
+                  grnRecord.save();
                 }
-              ).catch(() => console.log('saving grn failed!'));
+              ).catch(
+                () => console.log('Could not trigger resaving GRN as one or more items failed to save.')
+              );
 
-              //this.clearForm();
+              this.clearForm();
 
               if( nextAction === 'REDIRECT') {
                 this.transitionToRoute('grns.list');
