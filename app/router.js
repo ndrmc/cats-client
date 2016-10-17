@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('list');
     this.route('new');
   });
+  this.route('run');
 
   this.route('dispatch');
   this.route('newDispatch');

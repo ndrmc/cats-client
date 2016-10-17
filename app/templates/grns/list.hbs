@@ -4,10 +4,7 @@
 
 
 <div class="box">
-
   <div class="box-body">
-
-
     <div class="row">
       <div class="col-xs-2">
         <select class="form-control" name="">
@@ -37,8 +34,6 @@
         {{/link-to}}
       </div>
     </div>
-
-
   </div>
 </div>
 
@@ -47,33 +42,29 @@
 
   <div class="box-body">
     <table class="table table-bordered">
+
+      <thead>
+        <tr>
+          <th>GRN #</th>
+          <th>Receipt Date</th>
+          <th>Store</th>
+          <th>Received by</th>
+          <th># items</th>
+        </tr>
+      </thead>
       <tbody>
 
+      {{#each model.grns as |grn|}}
 
-      <tr>
-        <th style="width: 10px">#</th>
-        <th>GRN</th>
-        <th>Receipt Date</th>
-        <th>Store</th>
-        <th>Received by</th>
-        <th>Posted</th>
-        <th>Quantity</th>
-        <th>UoM</th>
-        <th>Tasks</th>
-      </tr>
+        <tr>
+          <td>{{grn.grnNumber}}</td>
+          <td>{{grn.receivedDate}}</td>
+          <td>{{grn.store_.name}}</td>
+          <td>{{grn.receivedBy}}</td>
+          <td>{{grn.items.length}}</td>
+        </tr>
 
-      <tr>
-        <td>1</td>
-        <td>098023429</td>
-        <td>Dec 2, 2016</td>
-        <td>Adama</td>
-        <td>Store Keeper 1</td>
-        <td>Yes</td>
-        <td>45</td>
-        <td>Mt</td>
-        <td>Open | Delete</td>
-      </tr>
-
+      {{/each}}
 
       </tbody>
     </table>

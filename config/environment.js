@@ -42,5 +42,12 @@ module.exports = function(environment) {
 
   }
 
+  if( !ENV.emberPouch )  {
+    ENV.emberPouch = {}; 
+  }
+
+  ENV.emberPouch.localDb = 'local_pouch';
+  ENV.emberPouch.remoteDb = 'http://localhost:5984/cats_remote';
+
   return ENV;
 };
