@@ -36,11 +36,11 @@
 
 
 
-        <li>
-          <a href="../widgets.html">
+        {{#link-to "dispatch" tagName="li" class="treeview"}}
+          <a {{bind-attr href="dispatch"}}>
             <i class="fa fa-send"></i> <span>Dispatch</span>
           </a>
-        </li>
+        {{/link-to}}
 
 
         <li class="header">SETTING</li>
