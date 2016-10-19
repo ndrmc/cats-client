@@ -7,7 +7,9 @@ export default Ember.Controller.extend({
   months:['--select month--','January','February','March','April','May','June','July','August','September','October','November','December'],
   _stores:['--select store--','Adama steel','Adama'],
   projects:['--Choose Project--','Government/200,000','WFP/100,000'],
-
+  zonesInRegion:[],
+  woredasInZone:[],
+  fdpsInWoreda:[],
   initDispatchItem:function(){
     this.set('dispatchItem',{
       commodityClass: null,
@@ -36,6 +38,48 @@ export default Ember.Controller.extend({
     this.initDispatchItem();
   },
   clearForm:function(){
+
+  },
+  regionSelected:function(region){
+    this.get('zonesInRegion').length=0;
+    var that=this;
+    var zones=this.get('store').query('zone', {
+        filter: {
+          region: region
+        }
+      }).then(function(zones){
+        that.get('zonesInRegion').pushObjects(zones.get('content'));
+        console.log("zonesInRegion",that.get('zonesInRegion'));
+      });
+
+
+  },
+  zoneSelected:function(zone){
+    this.get('woredasInZone').length=0;
+    var that=this;
+    var woredas=this.get('store').query('woreda', {
+        filter: {
+          zone: zone
+        }
+      }).then(function(woredas){
+        that.get('woredasInZone').pushObjects(woredas.get('content'));
+        console.log("woredas",that.get('woredasInZone'));
+      });
+
+
+  },
+  woredaSelected:function(woreda){
+    this.get('fdpsInWoreda').length=0;
+    var that=this;
+    var fdps=this.get('store').query('fdp', {
+        filter: {
+          woreda: woreda
+        }
+      }).then(function(fdps){
+        that.get('fdpsInWoreda').pushObjects(fdps.get('content'));
+        console.log("fdps",that.get('fdpsInWoreda'));
+      });
+
 
   }
 }
