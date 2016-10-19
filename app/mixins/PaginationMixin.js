@@ -4,13 +4,13 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
 
-  currentPage: function() {
+  currentPage: Ember.computed( 'selectedPage', function() {
 
     return parseInt(this.get('selectedPage'), 10) || 1;
 
-  }.property('selectedPage'),
+  }),
 
-  nextPage: function() {
+  nextPage: Ember.computed( 'currentPage', 'availablePages',  function() {
 
     var nextPage = this.get('currentPage') + 1;
     var availablePages = this.get('availablePages');
@@ -21,9 +21,9 @@ export default Ember.Mixin.create({
         return Ember.Object.create({id: this.get('currentPage')});
     }
 
-  }.property('currentPage', 'availablePages'),
+  }),
 
-  prevPage: function() {
+  prevPage: Ember.computed( 'currentPage',  function() {
 
     var prevPage = this.get('currentPage') - 1;
 
@@ -33,23 +33,23 @@ export default Ember.Mixin.create({
         return Ember.Object.create({id: this.get('currentPage')});
     }
 
-  }.property('currentPage'),
+  }),
 
-  availablePages: function() {
+  availablePages: Ember.computed( 'items.length', function() {
 
-    return Math.ceil((this.get('content.grns.length') / this.get('itemsPerPage')) || 1);
+    return Math.ceil((this.get('items.length') / this.get('itemsPerPage')) || 1);
 
-  }.property('content.grns.length'),
+  }),
 
-  paginatedContent: function() {
+  paginatedContent: Ember.computed( 'selectedPage', 'items.@each', function() {
 
     var selectedPage = this.get('selectedPage') || 1;
     var upperBound = (selectedPage * this.get('itemsPerPage'));
     var lowerBound = (selectedPage * this.get('itemsPerPage')) - this.get('itemsPerPage');
-    var models = this.get('content.grns');
+    var models = this.get('items');
 
     return models.slice(lowerBound, upperBound);
 
-  }.property('selectedPage', 'content.grns.@each')
+  })
 
 });

@@ -7,7 +7,7 @@
   <div class="box-body">
     <div class="row">
       <div class="col-xs-2">
-        <select class="form-control" value={{store}} onchange={{ action (mut store) value='target.value' }}>
+        <select class="form-control" value={{storeFilterId}} onchange={{ action (mut storeFilterId) value='target.value' }}>
           <option value="">Choose Store</option>
           {{#each model.stores as |store| }}
             <option value={{store.id}}>{{store.name}}</option>
