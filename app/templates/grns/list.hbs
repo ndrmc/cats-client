@@ -7,10 +7,13 @@
   <div class="box-body">
     <div class="row">
       <div class="col-xs-2">
-        <select class="form-control" name="">
-          <option>Choose Store</option>
-          <option>Adama Steel</option>
+        <select class="form-control" value={{store}} onchange={{ action (mut store) value='target.value' }}>
+          <option value="">Choose Store</option>
+          {{#each model.stores as |store| }}
+            <option value={{store.id}}>{{store.name}}</option>
+          {{/each}}
         </select>
+
       </div>
       <div class="col-xs-2">
         <div class="input-group date">
@@ -54,7 +57,7 @@
       </thead>
       <tbody>
 
-      {{#each model.grns as |grn|}}
+      {{#each paginatedContent as |grn|}}
 
         <tr>
           <td>{{grn.grnNumber}}</td>
@@ -68,17 +71,13 @@
 
       </tbody>
     </table>
+
   </div>
 
-  <!-- /.box-body -->
   <div class="box-footer clearfix">
-    <ul class="pagination pagination-sm no-margin pull-right">
-      <li><a href="#">&laquo;</a></li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">&raquo;</a></li>
-    </ul>
+    {{#pagination-pager pager=true count=availablePages current=currentPage pagerSpread=true  change='pageChanged'}}
+      <!-- This will show up between the two buttons. -->
+      Page {{currentPage}} of {{availablePages}}
+    {{/pagination-pager}}
   </div>
 </div>
-<!-- /.box -->
