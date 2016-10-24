@@ -22,7 +22,7 @@
       </div>
 
       <div class="col-xs-offset-3 col-xs-1">
-        {{#link-to "newDispatch" class="btn btn-primary"}}<i class="fa fa-plus"></i> Add{{/link-to}}
+        {{#link-to "dispatch.new" class="btn btn-primary"}}<i class="fa fa-plus"></i> Add{{/link-to}}
       </div>
     </div>
 
@@ -54,14 +54,19 @@
         {{#each model as |dispatch|}}
         <tr>
           <td></td>
-          <td>{{dispatch.gin}}</td>
+          <td>{{#link-to "dispatch.edit" dispatch.id }}
+              <a {{bind-attr href="dispatch.edit"}}>
+                {{dispatch.gin}}
+              </a>
+          {{/link-to}}</td>
           <td>{{dispatch.requisitionNo}}</td>
           <td>{{dispatch.dispatchMonth}}</td>
-          <td>{{dispatch.region}}</td>
-          <td>{{dispatch.zone}}</td>
-          <td>{{dispatch.woreda}}</td>
-          <td>{{dispatch.fdp}}</td>
+          <td>{{dispatch.region.name}}</td>
+          <td>{{dispatch.zone.name}}</td>
+          <td>{{dispatch.woreda.name}}</td>
+          <td>{{dispatch.fdp.name}}</td>
           <td>{{dispatch.dispatchDate}}</td>
+        <!--  <td>{{format-date dispatch.dispatchDate}}</td> -->
           <td>{{dispatch._store}}</td>
           <td>{{dispatch.enteredBy}}</td>
           <td></td>

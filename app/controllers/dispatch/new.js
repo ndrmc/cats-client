@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  dispatch:{},
-  dispatchItem:{},
-  dispatchItems:[],
+  newDispatch:{},
+  newDispatchItem:{},
+  newDispatchItems:[],
   months:['--select month--','January','February','March','April','May','June','July','August','September','October','November','December'],
   _stores:['--select store--','Adama steel','Adama'],
   projects:['--Choose Project--','Government/200,000','WFP/100,000'],
@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   woredasInZone:[],
   fdpsInWoreda:[],
   initDispatchItem:function(){
-    this.set('dispatchItem',{
+    this.set('newDispatchItem',{
       commodityClass: null,
       commodityType: null,
       roundedAllocationMT: null,
@@ -22,39 +22,46 @@ export default Ember.Controller.extend({
   },
   actions:{
     createDispatch: function(){
-      let newDispatch = this.store.createRecord( "dispatch", this.get('dispatch'));
+      debugger;
+      let newDispatch = this.store.createRecord( "dispatch", this.get('newDispatch'));
 
       newDispatch.save().then(()=>{
-        let dispatched=this.get('store').peekRecord('dispatch',newDispatch.id);
-        for (var i=0; i<this.get('dispatchItems').length; i++) {
-          let item=this.store.createRecord("dispatch-item",this.get('dispatchItems')[i]);
+        let dispatched=this.store.peekRecord('dispatch',newDispatch.id);
+        for (var i=0; i<this.get('newDispatchItems').length; i++) {
+          let item=this.store.createRecord("dispatch-item",this.get('newDispatchItems')[i]);
           item.set('dispatch',dispatched);
           item.save();
         }
       });
   },
   addDispatchItem: function(){
-    this.get('dispatchItems').pushObject(this.get('dispatchItem'));
+    this.get('newDispatchItems').pushObject(this.get('newDispatchItem'));
     this.initDispatchItem();
   },
   clearForm:function(){
 
   },
   regionSelected:function(region){
+
+   let r=this.get('store').peekRecord('region',region);
     this.get('zonesInRegion').length=0;
     var that=this;
-    var zones=this.get('store').query('zone', {
+    debugger;
+   var zones=this.get('store').query('zone', {
         filter: {
           region: region
         }
       }).then(function(zones){
         that.get('zonesInRegion').pushObjects(zones.get('content'));
+
         console.log("zonesInRegion",that.get('zonesInRegion'));
       });
 
-
+    this.get('newDispatch').region=r;
+  console.log("zones",zones);
   },
   zoneSelected:function(zone){
+    let z=this.get('store').peekRecord('zone',zone);
     this.get('woredasInZone').length=0;
     var that=this;
     var woredas=this.get('store').query('woreda', {
@@ -66,9 +73,11 @@ export default Ember.Controller.extend({
         console.log("woredas",that.get('woredasInZone'));
       });
 
+      this.get('newDispatch').zone=z;
 
   },
   woredaSelected:function(woreda){
+    let w=this.get('store').peekRecord('woreda',woreda);
     this.get('fdpsInWoreda').length=0;
     var that=this;
     var fdps=this.get('store').query('fdp', {
@@ -79,7 +88,12 @@ export default Ember.Controller.extend({
         that.get('fdpsInWoreda').pushObjects(fdps.get('content'));
         console.log("fdps",that.get('fdpsInWoreda'));
       });
+      this.get('newDispatch').woreda=w;
 
+  },
+  fdpSelected:function(fdp){
+    let f=this.get('store').peekRecord('fdp',fdp);
+    this.get('newDispatch').fdp=f;
 
   }
 }

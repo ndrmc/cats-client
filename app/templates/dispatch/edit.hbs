@@ -1,0 +1,225 @@
+<div>
+    <form {{action 'addDispatch' on='submit'}}>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="gin">GIN</label>
+                <div class="form-group">
+                  {{ input value= model.dispatch.gin  type="text" class="form-control"  }}
+                </div>
+            </div>
+        </div>
+<div class="row">
+  <div class="col-md-4">
+      <label for="projectCode">Project</label>
+      <div class="form-group">
+        <select class="form-control" value={{model.dispatch.projectCode}} onchange={{action (mut model.dispatch.projectCode) value="target.value"}}>
+          {{#each projects as |project|}}
+            <option value={{project}}>{{project}}</option>
+            {{/each}}
+        </select>
+      </div>
+  </div>
+  <div class="col-md-4">
+      <label for="siCode">SI Code(Donor)</label>
+      <div class="form-group">
+          <select class="form-control" value=model.dispatch.siCode name="">
+              <option>Select</option>
+          </select>
+      </div>
+  </div>
+  <div class="col-md-4">
+      <label for="requisitionNo">Requisition #</label>
+    {{ input value=model.dispatch.requisitionNo id="requisitionNo" type="text" class="form-control"  }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="dispatchDate">Dispatched Date</label>
+      <div class="form-group">
+        {{bootstrap-datepicker value=model.dispatch.dispatchDate autoclose=true }}
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="dispatchMonth">Dispatch Month</label>
+      <div class="form-group">
+          <select class="form-control" value={{model.dispatch.dispatchMonth}} onchange={{action (mut dispatch.dispatchMonth) value="target.value"}}>
+            {{#each months as |month|}}
+              <option value={{month}}>{{month}}</option>
+              {{/each}}
+          </select>
+      </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="store">Store</label>
+      <div class="form-group">
+        <select class="form-control" value={{model.dispatch._store}} onchange={{action (mut dispatch._store) value="target.value"}}>
+          {{#each _stores as |_store|}}
+            <option value={{_store}}>{{_store}}</option>
+            {{/each}}
+        </select>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="storeKeeper">Store Keeper</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.storeKeeper id="storeKeeper" type="text" class="form-control"  }}
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="region">Region</label>
+      <div class="form-group">
+          <select class="form-control" value={{model.dispatch.region}} >
+            <option value="">--select region--</option>
+            {{#each model.regions as |region|}}
+              <option value={{region.id}}>{{region.name}}</option>
+              {{/each}}
+          </select>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="zone">Zone</label>
+      <div class="form-group">
+        <select class="form-control" value={{model.dispatch.zone.id}}>
+            <option value="">--select zone--</option>
+          {{#each zonesInRegion as |zone|}}
+            <option value={{zone.id}}>{{zone._data.name}}</option>
+            {{/each}}
+        </select>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="woreda">Woreda</label>
+      <div class="form-group">
+        <select class="form-control" value={{model.dispatch.woreda}}>
+          <option value="">--select woreda--</option>
+          {{#each woredasInZone as |woreda|}}
+            <option value={{woreda.id}}>{{woreda._data.name}}</option>
+            {{/each}}
+        </select>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="fdp">FDP</label>
+      <div class="form-group">
+        <select class="form-control" value={{model.dispatch.fdp}}>
+          <option value="">--select fdp--</option>
+          {{#each fdpsInWoreda as |fdp|}}
+            <option value={{fdp.id}}>{{fdp._data.name}}</option>
+            {{/each}}
+        </select>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="panel panel-info">
+              <div class="panel-heading">Dispatch Items</div>
+
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                      <th>Commodity Class</th>
+                      <th>Commodity</th>
+                      <th>Rounded Allocation MT</th>
+                      <th>Total Units Dispatched</th>
+                      <th>Quintal Dispatched</th>
+                      <th>Dispatch MT</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  {{#each model.dispatchItems as |item| }}
+                  <tr>
+                      <td> {{ input value=item.commodityClass type="select" class="form-control"  }}</td>
+                      <td> {{ input value=item.commodity type="select" class="form-control"  }}</td>
+                      <td> {{ input value=item.roundedAllocationMT type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.totalUnitsDispatched  type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.quintalDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.dispatchMT  type="text" class="form-control"  }}</td>
+
+                  </tr>
+                    {{/each}}
+                  <tr>
+
+                      <td> {{ input value=dispatchItem.commodityClass type="select" class="form-control"  }}</td>
+                      <td> {{ input value=dispatchItem.commodity type="select" class="form-control"  }}</td>
+                      <td> {{ input value=dispatchItem.roundedAllocationMT type="text" class="form-control"  }}</td>
+                      <td> {{ input value=dispatchItem.totalUnitsDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=dispatchItem.quintalDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=dispatchItem.dispatchMT  type="text" class="form-control"  }}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary" >Add</button>
+                      </td>
+
+
+                  </tr>
+
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="row">
+    <!--   ----------   -->
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">Transporter details</div>
+
+            <div class="row">
+              <div class="col-md-6">
+                  <label for="transporter">Transporter</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.transporter  type="text" class="form-control"  }}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label for="plateNo">Plate #</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.plateNo type="text" class="form-control"  }}
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                  <label for="trailerNo">Trailer plate #</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.trailerNo type="text" class="form-control"  }}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label for="driverName">Driver's name</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.driverName type="text" class="form-control"  }}
+                  </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+
+    <div class="col-md-6">
+        <a href="#"  class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+        <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a href="#" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
+    </div>
+</div>
+    </form>
+</div>
