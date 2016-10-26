@@ -65,7 +65,7 @@
   <div class="col-md-6">
       <label for="storeKeeper">Store Keeper</label>
       <div class="form-group">
-        {{ input value=dispatch.storeKeeper id="storeKeeper" type="text" class="form-control"  }}
+        {{ input value=newDispatch.storeKeeper id="storeKeeper" type="text" class="form-control"  }}
       </div>
   </div>
 </div>
@@ -122,7 +122,6 @@
       <div class="col-md-12">
           <div class="panel panel-info">
               <div class="panel-heading">Dispatch Items</div>
-
               <table class="table table-striped">
                   <thead>
                   <tr>
@@ -216,7 +215,7 @@
     </div>
 
     <div class="col-md-6">
-        <a onclick={{ action "createDispatch" }} href="/dispatch/list"  class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a onclick={{ action "createDispatch" }}   class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
         <a href="#" onclick={{ action "createDispatch" "clearForm"}} class="btn btn-primary"><i class="fa fa-save"></i> Save & New</a>
         <a href="/dispatch" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
     </div>

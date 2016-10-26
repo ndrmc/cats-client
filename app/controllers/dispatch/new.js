@@ -22,17 +22,24 @@ export default Ember.Controller.extend({
   },
   actions:{
     createDispatch: function(){
-      debugger;
+
       let newDispatch = this.store.createRecord( "dispatch", this.get('newDispatch'));
+      debugger;
 
       newDispatch.save().then(()=>{
+        console.log("items*************",this.get('newDispatchItems').length);
         let dispatched=this.store.peekRecord('dispatch',newDispatch.id);
+        console.log("dispatched*************",dispatched);
+
         for (var i=0; i<this.get('newDispatchItems').length; i++) {
           let item=this.store.createRecord("dispatch-item",this.get('newDispatchItems')[i]);
           item.set('dispatch',dispatched);
           item.save();
         }
       });
+
+      this.transitionToRoute('dispatch.list');
+
   },
   addDispatchItem: function(){
     this.get('newDispatchItems').pushObject(this.get('newDispatchItem'));
