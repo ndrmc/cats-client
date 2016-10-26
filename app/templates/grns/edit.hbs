@@ -1,5 +1,5 @@
 {{#ember-wormhole to="page-header"}}
-  <h1>New GRN</h1>
+  <h1>Edit GRN</h1>
 {{/ember-wormhole}}
 
 
@@ -20,15 +20,15 @@
 
       <div class="col-md-6">
         <label for="grn">Donor *</label>
-        <div class="form-group {{if validationErrors.donorId 'has-error' '' }}">
-          <select class="form-control" value={{if grn.donor grn.donor.id ''}} onchange={{ action "changeSelect"}} name="donor">
+        <div class="form-group {{if validationErrors.donor 'has-error' '' }}">
+          <select class="form-control" onchange={{ action "changeSelect"}} name="donor">
             <option value="">Choose Donor</option>
             {{#each model.donors as |donor| }}
-              <option value={{donor.id}}>{{donor.name}}</option>
+              <option value={{donor.id}} selected={{ eq donor.id grn.donor.id}}>{{donor.name}}</option>
             {{/each}}
           </select>
 
-          <span class="help-block">{{ validationErrors.donorId }}</span>
+          <span class="help-block">{{ validationErrors.donor }}</span>
         </div>
       </div>
     </div>
@@ -48,10 +48,10 @@
       <div class="col-md-6">
         <label for="grn">Store *</label>
         <div class="form-group {{if validationErrors.store_ 'has-error' '' }}">
-          <select class="form-control" value={{if grn.store_ grn.store_.id ''}} onchange={{ action "changeSelect"}} name="store">
+          <select class="form-control" onchange={{ action "changeSelect"}} name="store">
             <option value="">Choose Store</option>
             {{#each model.stores as |store| }}
-              <option value={{store.id}}>{{store.name}}</option>
+              <option value={{store.id}} selected={{ eq store.id grn.store_.id}}>{{store.name}}</option>
             {{/each}}
           </select>
 
@@ -65,11 +65,12 @@
     <div class="row">
       <div class="col-md-6">
         <label for="grn">Project *</label>
+        {{log 'Name is:' if ( eq project.id projectId) }}
         <div class="form-group {{if validationErrors.project 'has-error' '' }}">
-          <select class="form-control" value={{if grn.project grn.project.id ''}} onchange={{ action "changeSelect"}} name="project">
+          <select class="form-control" onchange={{ action "changeSelect"}} name="project">
             <option value="">Choose Project</option>
             {{#each model.projects as |project| }}
-              <option value={{project.id}}>{{project.name}}</option>
+              <option value={{project.id}} selected={{ eq project.id grn.project.id}}>{{project.name}}</option>
             {{/each}}
           </select>
 
@@ -105,30 +106,31 @@
           <th>UoM</th>
           <th>Quantity</th>
           <th>Waybill</th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
 
-        {{#each grnItems as |grnItem| }}
+        {{#each grn.items as |grnItem| }}
           <tr>
             <td>{{grnItem.commodity.name}}</td>
             <td>{{grnItem.batchNumber}}</td>
             <td>{{grnItem.unitOfMeasure}}</td>
             <td>{{grnItem.quantity}}</td>
             <td>{{grnItem.wayBill}}</td>
-            <td></td>
+            <td><a href="#" class="remove-list-item" {{action 'removeGrnItem' grnItem}} title="Delete">&times;</a></td>
           </tr>
         {{/each}}
 
         <tr>
           <td>
             <div class="form-group  {{if grnItemValidationErrors.commodity 'has-error' '' }}">
-              <select class="form-control" value={{if grnItem.donor grnItem.commodity.id ''}} onchange={{ action "changeSelect"}} name="commodity">
+              <select class="form-control"  onchange={{ action "changeSelect"}} name="commodity">
                 <option value="">Choose Commodity</option>
 
                 {{#each model.commodities as |commodity| }}
-                  <option value={{commodity.id}}>{{commodity.name}}</option>
+                  <option value={{commodity.id}} selected={{ eq grnItem.commodity grnItem.commodity.id}}>{{commodity.name}}</option>
                 {{/each}}
 
               </select>
@@ -260,13 +262,9 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
 
-      </div>
-
-      <div class="col-md-6">
-        <a onclick={{ action "createGRN" "REDIRECT"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
-        <a onclick={{ action "createGRN" "STAY"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
+      <div class="col-md-12">
+        <a onclick={{ action "updateGRN" }} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
         {{#link-to  'grns.list'  class="btn btn-defails" }}
           <i class="fa fa-cancel"></i> Cancel
         {{/link-to}}
