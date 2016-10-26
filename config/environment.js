@@ -13,6 +13,10 @@ module.exports = function(environment) {
       }
     },
 
+    ui: {
+      paginatedListsSizePerPage: 10
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
@@ -43,7 +47,7 @@ module.exports = function(environment) {
   }
 
   if( !ENV.emberPouch )  {
-    ENV.emberPouch = {}; 
+    ENV.emberPouch = {};
   }
 
   ENV.emberPouch.localDb = 'local_pouch';

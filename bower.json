@@ -11,6 +11,7 @@
     "pouchdb": "^5.4.5",
     "relational-pouch": "^1.4.4",
     "pouchdb-find": "^0.10.2",
-    "bootstrap-datepicker": "^1.6.4"
+    "bootstrap-datepicker": "^1.6.4",
+    "sifter": "~0.4.3"
   }
 }
