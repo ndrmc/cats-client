@@ -1,0 +1,193 @@
+{{#ember-wormhole to="page-header"}}
+  <h1>GRN <small>Details</small></h1>
+{{/ember-wormhole}}
+
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">Basic Information</h3>
+  </div>
+
+  <div class="box-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="table-attr-key">
+            GRN Number
+          </td>
+          <td>
+            {{model.grnNumber}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Donor
+          </td>
+          <td>
+            {{model.donor.name}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Store
+          </td>
+          <td>
+            {{model.store_.name}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Project
+          </td>
+          <td>
+            {{model.project.name}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Received Date
+          </td>
+          <td>
+            {{model.receivedDate}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Received By
+          </td>
+          <td>
+            {{model.receivedBy}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">Items</h3>
+  </div>
+
+  <div class="box-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Commodity</th>
+          <th>Batch</th>
+          <th>UoM</th>
+          <th>Quantity</th>
+          <th>Waybill</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {{#each model.items as |grnItem| }}
+          <tr>
+            <td>{{grnItem.commodity.name}}</td>
+            <td>{{grnItem.batchNumber}}</td>
+            <td>{{grnItem.unitOfMeasure}}</td>
+            <td>{{grnItem.quantity}}</td>
+            <td>{{grnItem.wayBill}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">Transporter Information</h3>
+  </div>
+
+  <div class="box-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="table-attr-key">
+            Transporter
+          </td>
+          <td>
+            {{model.transporter}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Weight Bridge #
+          </td>
+          <td>
+            {{model.weightBridge}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Plate #
+          </td>
+          <td>
+            {{model.plateNumber}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Trailer Plate #
+          </td>
+          <td>
+            {{model.trailerPlate}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Driver's Name
+          </td>
+          <td>
+            {{model.driverName}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Weight Before Unloading
+          </td>
+          <td>
+            {{model.weightBeforeUnloading}}
+          </td>
+        </tr>
+
+        <tr>
+          <td  class="table-attr-key">
+            Weight After Unloading
+          </td>
+          <td>
+            {{model.weightAfterUnloading}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  {{#link-to  'grns.list'  class="btn btn-default" }}
+    <i class="fa fa-chevron-left"></i> Go Back
+  {{/link-to}}
+
+    {{#link-to  'grns.edit' model.id  class="btn btn-primary" }}
+      <i class="fa fa-pencil-square-o"></i> Edit
+    {{/link-to}}
+
+
+</div>
