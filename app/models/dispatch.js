@@ -1,14 +1,16 @@
 import DS from 'ember-data';
 import { hasMany } from 'ember-data/relationships';
+import { belongsTo } from 'ember-data/relationships';
 export default DS.Model.extend({
     gin: DS.attr('number'),
     requisitionNo: DS.attr('number'),
     roundNo: DS.attr('string'),
-    region: DS.attr('string'),
-    zone: DS.attr('string'),
-    woreda: DS.attr('string'),
-    fdp: DS.attr('string'),
+    region: belongsTo('region'),
+    zone: belongsTo('zone'),
+    woreda: belongsTo('woreda'),
+    fdp:belongsTo('fdp'),
     transporter:DS.attr('string'),
+    driverName:DS.attr('string'),
     plateNo: DS.attr('string'),
     trailerNo: DS.attr('string'),
     dispatchMonth: DS.attr('string'),

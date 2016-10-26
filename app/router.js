@@ -17,8 +17,15 @@ Router.map(function() {
   });
   this.route('run');
 
-  this.route('dispatch');
-  this.route('newDispatch');
+  this.route('dispatch', function() {
+    this.route('new');
+    this.route('list');
+
+    this.route('edit', {
+      path: ':dispatchID'
+    });
+  });
+
 });
 
 export default Router;

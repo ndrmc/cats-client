@@ -1,0 +1,182 @@
+<div>
+    <form {{action 'addDispatch' on='submit'}}>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="gin">GIN</label>
+                <div class="form-group">
+                  {{ input value= model.dispatch.gin  type="text" class="form-control" disabled=disableFlag}}
+                </div>
+            </div>
+        </div>
+<div class="row">
+  <div class="col-md-4">
+      <label for="projectCode">Project</label>
+      <div class="form-group">
+        {{input value=model.dispatch.projectCode type="text" class="form-control" disabled=disableFlag }}
+      </div>
+
+  </div>
+  <div class="col-md-4">
+      <label for="siCode">SI Code(Donor)</label>
+      <div class="form-group">
+        {{input value=model.dispatch.siCode type="text" class="form-control" disabled=disableFlag  }}
+      </div>
+
+  </div>
+  <div class="col-md-4">
+      <label for="requisitionNo">Requisition #</label>
+      <div class="form-group">
+        {{input value=model.dispatch.requisitionNo type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="dispatchDate">Dispatched Date</label>
+      <div class="form-group">
+        {{bootstrap-datepicker value=model.dispatch.dispatchDate autoclose=true disabled=disableFlag }}
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="dispatchMonth">Dispatch Month</label>
+      <div class="form-group">
+        {{input value=model.dispatch.dispatchMonth type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="store">Store</label>
+      <div class="form-group">
+        {{input value=model.dispatch._store type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="storeKeeper">Store Keeper</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.storeKeeper  type="text" class="form-control" disabled=disableFlag  }}
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="region">Region</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.region.name type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="zone">Zone</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.zone.name  type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="woreda">Woreda</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.woreda.name  type="text" class="form-control" disabled=disableFlag  }}
+      </div>
+  </div>
+  <div class="col-md-6">
+      <label for="fdp">FDP</label>
+      <div class="form-group">
+        {{ input value=model.dispatch.fdp.name type="text" class="form-control" disabled=disableFlag }}
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="panel panel-info">
+              <div class="panel-heading">Dispatch Items</div>
+
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                      <th>Commodity Class</th>
+                      <th>Commodity</th>
+                      <th>Rounded Allocation MT</th>
+                      <th>Total Units Dispatched</th>
+                      <th>Quintal Dispatched</th>
+                      <th>Dispatch MT</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  {{#each model.dispatchItems as |item| }}
+                  <tr>
+                      <td> {{ input value=item.commodityClass type="select" class="form-control"  }}</td>
+                      <td> {{ input value=item.commodity type="select" class="form-control"  }}</td>
+                      <td> {{ input value=item.roundedAllocationMT type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.totalUnitsDispatched  type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.quintalDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=item.dispatchMT  type="text" class="form-control"  }}</td>
+
+                  </tr>
+                  {{/each}}
+
+
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="row">
+    <!--   ----------   -->
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">Transporter details</div>
+
+            <div class="row">
+              <div class="col-md-6">
+                  <label for="transporter">Transporter</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.transporter  type="text" class="form-control" disabled=disableFlag }}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label for="plateNo">Plate #</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.plateNo type="text" class="form-control" disabled=disableFlag }}
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                  <label for="trailerNo">Trailer plate #</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.trailerNo type="text" class="form-control" disabled=disableFlag}}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label for="driverName">Driver's name</label>
+                  <div class="form-group">
+                    {{ input value=model.dispatch.driverName type="text" class="form-control" disabled=disableFlag }}
+                  </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+
+    <div class="col-md-6">
+        <a href="#"  class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+        <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a href="#" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
+    </div>
+</div>
+    </form>
+</div>
