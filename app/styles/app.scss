@@ -63,5 +63,22 @@ i.app-modal-close {
 
 
 .errorMessageText {
-  color: #dd4b39; 
+  color: #dd4b39;
+}
+
+
+.remove-list-item {
+  font-size: 1.5em;
+  color: gray;
+}
+
+
+a.icon-link:link, a.icon-link:visited, a.icon-link:active
+{
+    display: inline;
+    color: gray;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
 }

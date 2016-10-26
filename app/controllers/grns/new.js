@@ -102,10 +102,7 @@ export default Ember.Controller.extend({
             break;
 
           default:
-
         }
-
-
     },
 
 
@@ -117,7 +114,7 @@ export default Ember.Controller.extend({
       var hasValidationErrors = false;
 
       for( var i = 0; i < attrsThatCantBeBlank.length; i++ ) {
-        if( Ember.isEmpty(this.get('grnItem.' + attrsThatCantBeBlank[i] )) ) {
+        if( Ember.isBlank(this.get('grnItem.' + attrsThatCantBeBlank[i] )) ) {
           hasValidationErrors = true;
 
           this.set('grnItemValidationErrors.'  + attrsThatCantBeBlank[i], "This field cannot be left blank.");
@@ -139,8 +136,6 @@ export default Ember.Controller.extend({
 
     createGRN: function(nextAction) {
 
-      debugger;
-
       this.initValidationErrors();
 
       var attrsThatCantBeBlank = [ 'grnNumber', 'donor', 'receivedDate', 'store_', 'project', 'receivedBy' ];
@@ -148,7 +143,7 @@ export default Ember.Controller.extend({
       var hasValidationErrors = false;
 
       for( var i = 0; i < attrsThatCantBeBlank.length; i++ ) {
-        if( Ember.isEmpty(this.get('grn.' + attrsThatCantBeBlank[i] )) ) {
+        if( Ember.isBlank(this.get('grn.' + attrsThatCantBeBlank[i] )) ) {
           hasValidationErrors = true;
 
           this.set('validationErrors.'  + attrsThatCantBeBlank[i], "This field cannot be left blank.");
