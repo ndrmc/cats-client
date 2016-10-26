@@ -62,7 +62,7 @@
 
         <tr>
           <td>{{grn.grnNumber}}</td>
-          <td>{{grn.receivedDate}}</td>
+          <td>{{format-date grn.receivedDate 'short'}}</td>
           <td>{{grn.store_.name}}</td>
           <td>{{grn.receivedBy}}</td>
           <td>{{grn.items.length}}</td>

@@ -52,7 +52,7 @@
             Received Date
           </td>
           <td>
-            {{model.receivedDate}}
+            {{format-date model.receivedDate 'long'}}
           </td>
         </tr>
 
@@ -185,9 +185,7 @@
     <i class="fa fa-chevron-left"></i> Go Back
   {{/link-to}}
 
-    {{#link-to  'grns.edit' model.id  class="btn btn-primary" }}
-      <i class="fa fa-pencil-square-o"></i> Edit
-    {{/link-to}}
-
-
+  {{#link-to  'grns.edit' model.id  class="btn btn-primary" }}
+    <i class="fa fa-pencil-square-o"></i> Edit
+  {{/link-to}}
 </div>

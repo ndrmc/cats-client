@@ -14,7 +14,7 @@ module.exports = function(environment) {
     },
 
     ui: {
-      paginatedListsSizePerPage: 10
+      paginatedListsSizePerPage: 15
     },
 
     APP: {
