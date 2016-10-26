@@ -1,8 +1,5 @@
 import Ember from 'ember';
 
-import { UOM_MT, UOM_KG } from '../../config/consts';
-
-
 var grnTemplate = {
   grnNumber: "",
   donor: "",
@@ -17,14 +14,6 @@ var grnTemplate = {
   trailerPlate: "",
   driverName: "",
   items: []
-};
-
-var newGrnItemProto = {
-  commodity: null,
-  batchNumber: "",
-  unitOfMeasure: "",
-  quantity: null,
-  wayBill: ""
 };
 
 export default Ember.Controller.extend({

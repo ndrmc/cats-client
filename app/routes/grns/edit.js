@@ -19,7 +19,7 @@ export default Ember.Route.extend({
 
     model.grn.then( (grn) => {
       controller.set( 'grn', grn);
-    })
+    }); 
 
   }
 });

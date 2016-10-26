@@ -12,6 +12,7 @@
     "relational-pouch": "^1.4.4",
     "pouchdb-find": "^0.10.2",
     "bootstrap-datepicker": "^1.6.4",
-    "sifter": "~0.4.3"
+    "sifter": "~0.4.3",
+    "moment": "momentjs#^2.15.2"
   }
 }
