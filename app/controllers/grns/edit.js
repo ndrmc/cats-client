@@ -26,12 +26,6 @@ export default Ember.Controller.extend({
 
   },
 
-  projectId: Ember.computed( 'grn.project', function() {
-    return this.get('grn') ? this.get('grn').belongsTo('project').id() : '';
-  }
-
-  ),
-
   initValidationErrors: function() {
       this.set( "validationErrors",
             {
