@@ -189,7 +189,7 @@ export default Ember.Controller.extend({
           this.get('grn').save().then((grn) => {
             this.get('notifications').success('Updated!');
 
-            this.transitionToRoute('grns.list');
+            this.transitionToRoute('grns.show', this.get('grn').id);
           });
         }
 
