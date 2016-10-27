@@ -26,12 +26,6 @@ export default Ember.Controller.extend({
 
   },
 
-  projectId: Ember.computed( 'grn.project', function() {
-    return this.get('grn') ? this.get('grn').belongsTo('project').id() : '';
-  }
-
-  ),
-
   initValidationErrors: function() {
       this.set( "validationErrors",
             {
@@ -195,7 +189,7 @@ export default Ember.Controller.extend({
           this.get('grn').save().then((grn) => {
             this.get('notifications').success('Updated!');
 
-            this.transitionToRoute('grns.list');
+            this.transitionToRoute('grns.show', this.get('grn').id);
           });
         }
 
