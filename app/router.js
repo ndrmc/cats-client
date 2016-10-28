@@ -18,7 +18,7 @@ Router.map(function() {
     this.route('new');
     this.route('list');
 
-    this.route('edit', {
+    this.route('detail', {
       path: ':dispatchID'
     });
   });

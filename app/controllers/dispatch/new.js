@@ -56,16 +56,19 @@ export default Ember.Controller.extend({
     debugger;
    var zones=this.get('store').query('zone', {
         filter: {
-          region: region
+          region: region,
+
         }
       }).then(function(zones){
-        that.get('zonesInRegion').pushObjects(zones.get('content'));
-
-        console.log("zonesInRegion",that.get('zonesInRegion'));
+        for(var zi=0;zi<zones.get('content').length;zi++){
+          if(Object.keys(zones.get('content')[zi]._data).length!=0){
+            that.get('zonesInRegion').pushObject(zones.get('content')[zi]);
+          }
+        }
       });
 
     this.get('newDispatch').region=r;
-  console.log("zones",zones);
+
   },
   zoneSelected:function(zone){
     let z=this.get('store').peekRecord('zone',zone);
@@ -76,8 +79,11 @@ export default Ember.Controller.extend({
           zone: zone
         }
       }).then(function(woredas){
-        that.get('woredasInZone').pushObjects(woredas.get('content'));
-        console.log("woredas",that.get('woredasInZone'));
+        for(var wi=0;wi<woredas.get('content').length;wi++){
+          if(Object.keys(woredas.get('content')[wi]._data).length!=0){
+            that.get('woredasInZone').pushObject(woredas.get('content')[wi]);
+          }
+        }
       });
 
       this.get('newDispatch').zone=z;
@@ -92,8 +98,11 @@ export default Ember.Controller.extend({
           woreda: woreda
         }
       }).then(function(fdps){
-        that.get('fdpsInWoreda').pushObjects(fdps.get('content'));
-        console.log("fdps",that.get('fdpsInWoreda'));
+        for(var fi=0;fi<fdps.get('content').length;fi++){
+          if(Object.keys(fdps.get('content')[fi]._data).length!=0){
+            that.get('fdpsInWoreda').pushObject(fdps.get('content')[fi]);
+          }
+        }
       });
       this.get('newDispatch').woreda=w;
 
