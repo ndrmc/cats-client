@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('grns', function() {
     this.route('index', { path: '/' });
     this.route('list');
@@ -23,6 +22,7 @@ Router.map(function() {
     });
   });
 
+  this.route('edit');
 });
 
 export default Router;
