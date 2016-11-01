@@ -39,7 +39,7 @@
       <div class="col-md-6">
         <label for="grn">Received Date *</label>
         <div class="form-group {{if validationErrors.receivedDate 'has-error' '' }}">
-          {{bootstrap-datepicker value=grn.receivedDate class="form-control"}}
+          {{bootstrap-datepicker value=grn.receivedDate class="form-control" autoclose=true}}
 
           <span class="help-block">{{ validationErrors.receivedDate }}</span>
         </div>
@@ -260,11 +260,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
 
-      </div>
-
-      <div class="col-md-6">
+      <div class="col-md-12">
         <a onclick={{ action "createGRN" "REDIRECT"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
         <a onclick={{ action "createGRN" "STAY"}} href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save and New</a>
         {{#link-to  'grns.list'  class="btn btn-defails" }}

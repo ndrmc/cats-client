@@ -18,5 +18,5 @@ export default Model.extend({
     trailerPlate: DS.attr('string'),
     driverName: DS.attr('string'),
 
-    items: hasMany('grn-item')
+    items: hasMany('grn-item')  
 });

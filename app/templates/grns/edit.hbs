@@ -39,7 +39,7 @@
       <div class="col-md-6">
         <label for="grn">Received Date *</label>
         <div class="form-group {{if validationErrors.receivedDate 'has-error' '' }}">
-          {{bootstrap-datepicker value=grn.receivedDate class="form-control"}}
+          {{bootstrap-datepicker value=grn.receivedDate class="form-control" autoclose=true}}
 
           <span class="help-block">{{ validationErrors.receivedDate }}</span>
         </div>
@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-md-6">
         <label for="grn">Project *</label>
-        {{log 'Name is:' if ( eq project.id grn.project.id) }}
+        
         <div class="form-group {{if validationErrors.project 'has-error' '' }}">
           <select class="form-control" onchange={{ action "changeSelect"}} name="project">
             <option value="">Choose Project</option>
