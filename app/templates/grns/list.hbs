@@ -33,9 +33,11 @@
 
       <div class="form-group col-md-3">
         <div class="input-group" style="border-left: 1px solid #eee;padding-left: 32px;">
-          <input class="form-control" placeholder="GRN" type="text">
+
+          {{ input action='findGrn' value=findByGrnInput placeholder="GRN" type="text" class="form-control"  autofocus="autofocus"  }}
+
           <div class="input-group-btn">
-            <a class="btn btn-default">Go</a>
+            <a class="btn btn-default" onclick={{action 'findGrn'}}>Go</a>
           </div>
         </div>
       </div>

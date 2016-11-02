@@ -5,6 +5,13 @@ import config from 'cats-client/config/environment';
 
 export default Ember.Controller.extend( PaginationMixin, {
 
+    init() {
+      this._super(arguments);
+
+      this.get('notifications').setDefaultAutoClear(true);
+      this.get('notifications').setDefaultClearNotification(3000);
+    },
+
     itemsPerPage: config.ui.paginatedListsSizePerPage,
 
     storeFilterId: '',
@@ -37,9 +44,30 @@ export default Ember.Controller.extend( PaginationMixin, {
 
 
     actions: {
-      pageChanged(current, previous) {
-        console.log( 'currnet', current);
+      pageChanged: function(current, previous) {
         this.set('selectedPage', current);
+      },
+
+      findGrn: function() {
+
+        var searchInput = this.get('findByGrnInput').trim();
+
+        if( !searchInput ) {
+          this.get('notifications').error('Enter a GRN number first!');
+          return;
+        }
+
+        this.store.queryRecord( 'grn', { filter: { grnNumber: searchInput}})
+                  .then(
+                    (grn) =>  {
+                      if( grn == null ) {
+                        this.get('notifications').error('No GRN found! Enter the correct number.');
+                      }
+                      else {
+                        this.transitionToRoute('grns.show', grn.id);
+                      }
+                    }
+                  );
       }
     }
 
