@@ -1,8 +1,9 @@
 import DS from 'ember-data';
 import { hasMany, belongsTo } from 'ember-data/relationships';
 import { Model } from 'ember-pouch';
+import BaseDomain from '../mixins/BaseDomain';
 
-export default Model.extend({
+export default Model.extend(BaseDomain, {
     grnNumber: DS.attr('string'),
     donor: belongsTo('donor'),
     receivedDate: DS.attr('date'),
@@ -18,5 +19,5 @@ export default Model.extend({
     trailerPlate: DS.attr('string'),
     driverName: DS.attr('string'),
 
-    items: hasMany('grn-item')  
+    items: hasMany('grn-item')
 });
