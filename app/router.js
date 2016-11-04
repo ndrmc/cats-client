@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('grns', function() {
     this.route('index', { path: '/' });
     this.route('list');
@@ -21,11 +20,12 @@ Router.map(function() {
     this.route('new');
     this.route('list');
 
-    this.route('edit', {
+    this.route('detail', {
       path: ':dispatchID'
     });
   });
 
+  this.route('edit');
 });
 
 export default Router;

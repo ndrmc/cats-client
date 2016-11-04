@@ -7,6 +7,6 @@ export default Ember.Route.extend({
        zones: this.store.findAll('zone'),
        woredas: this.store.findAll('woreda'),
        fdps: this.store.findAll('fdp')
-    }
+    };
   }
 });
