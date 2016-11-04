@@ -12,6 +12,16 @@ export default Ember.Controller.extend( PaginationMixin, {
       this.get('notifications').setDefaultClearNotification(3000);
     },
 
+    numberOfDaysAllowedToDeleteGrn: config.APP.numberOfDaysAllowedToDeleteGrn,
+
+    lastDeletableRecordDate: Ember.computed('numberOfDaysAllowedToDeleteGrn', function() {
+        return new Date();
+        
+        var date = new Date();
+        date.setDate(new Date().getDate()  - this.get('numberOfDaysAllowedToDeleteGrn')) ;
+        return date;
+    }),
+
     itemsPerPage: config.ui.paginatedListsSizePerPage,
 
     storeFilterId: '',
@@ -46,6 +56,26 @@ export default Ember.Controller.extend( PaginationMixin, {
     actions: {
       pageChanged: function(current, previous) {
         this.set('selectedPage', current);
+      },
+
+      deleteGrn: function(grn) {
+
+        let deletedItems = [];
+
+        grn.get('items').then(
+          (items) => {
+            items.map((item) => {
+              deletedItems.push(item.destroyRecord());
+            });
+
+
+            Ember.RSVP.all(deletedItems).then(() => {
+              grn.destroyRecord();
+
+              this.get('notifications').success('Deleted!');
+            });
+          }
+        );
       },
 
       findGrn: function() {

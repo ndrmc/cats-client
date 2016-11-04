@@ -34,7 +34,7 @@
       <div class="form-group col-md-3">
         <div class="input-group" style="border-left: 1px solid #eee;padding-left: 32px;">
 
-          {{ input action='findGrn' value=findByGrnInput placeholder="GRN" type="text" class="form-control"  autofocus="autofocus"  }}
+          {{ input enter='findGrn' value=findByGrnInput placeholder="GRN" type="text" class="form-control"  autofocus="autofocus"  }}
 
           <div class="input-group-btn">
             <a class="btn btn-default" onclick={{action 'findGrn'}}>Go</a>
@@ -86,6 +86,11 @@
             {{#link-to "grns.edit" grn.id class="icon-link"}}
               <i title="Edit" class="fa fa-pencil-square-o" aria-hidden="true"></i>
             {{/link-to}}
+
+            {{#if (gt grn.dateCreated lastDeletableRecordDate)}}
+              <span style="margin: 0 5px 0 5px; color: #a5a4a4">&middot;</span>
+              <i onclick={{action 'deleteGrn' grn}} title="Delete" class="fa fa-remove clickable-icon" aria-hidden="true"></i>
+            {{/if}}
           </td>
         </tr>
 
