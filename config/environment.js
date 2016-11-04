@@ -17,9 +17,10 @@ module.exports = function(environment) {
       paginatedListsSizePerPage: 15
     },
 
+
+
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      numberOfDaysAllowedToDeleteGrn: 2
     }
   };
 

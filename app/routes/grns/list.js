@@ -12,5 +12,10 @@ export default Ember.Route.extend({
     this._super(controller, model);
 
     controller.set('model', model);
+  },
+  resetController: function(controller, isExiting, transition) {
+    if (isExiting) {
+      controller.set('findByGrnInput', '');
+    }
   }
 });
