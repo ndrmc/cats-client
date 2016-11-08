@@ -16,13 +16,10 @@ Router.map(function() {
   this.route('dispatch', function() {
     this.route('new');
     this.route('list');
-
-    this.route('detail', {
-      path: ':dispatchID'
-    });
+    this.route('detail',{ path: ':dispatchID'});
+    this.route('edit',{ path: ':dispatch_edit_id'});
   });
 
-  this.route('edit');
-});
+  });
 
 export default Router;

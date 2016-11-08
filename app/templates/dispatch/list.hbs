@@ -54,11 +54,11 @@
         {{#each model as |dispatch|}}
         <tr>
           <td></td>
-          <td>{{#link-to "dispatch.detail" dispatch.id }}
-              <a {{bind-attr href="dispatch.edit"}}>
-                {{dispatch.gin}}
-              </a>
-          {{/link-to}}</td>
+          <td>
+            {{#link-to "dispatch.detail" dispatch.id }}
+              {{dispatch.gin}}
+            {{/link-to}}
+          </td>
           <td>{{dispatch.requisitionNo}}</td>
           <td>{{dispatch.dispatchMonth}}</td>
           <td>{{dispatch.region.name}}</td>
@@ -69,7 +69,11 @@
         <!--  <td>{{format-date dispatch.dispatchDate}}</td> -->
           <td>{{dispatch._store}}</td>
           <td>{{dispatch.enteredBy}}</td>
-          <td></td>
+          <td>
+            {{#link-to "dispatch.edit" dispatch.id }}
+                  <span>edit</span>
+            {{/link-to}}
+          </td>
         </tr>
         {{/each}}
 
