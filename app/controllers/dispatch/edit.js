@@ -8,41 +8,19 @@ export default Ember.Controller.extend({
   zonesInRegion:[],
   woredasInZone:[],
   fdpsInWoreda:[],
-
   actions:{
-    saveDispatch: function(){
+      saveDispatch: function(){
 
       this.get('dispatch').save().then(function(dispatch){
         console.log(dispatch);
         for (var i=0; i<this.get('model').dispatchItems.length; i++) {
           let item=this.store.createRecord("dispatch-item",this.get('model').dispatchItems[i]);
-          item.set('dispatch',dispatched);
+          item.set('dispatch',dispatch);
           item.save();
         }
 
       });
-      /*this.get('store').findRecord('dispatch',disp_id).then(
-        function(dispatch){
-          console.log("dispatch original*************",dispatch);
-          dispatch=this.get('model').dispatch;
-          console.log("dispatch new*************",dispatch);
-          dispatch.save();
-        }
-      );*/
-    //  updateDispatch.save().then(()=>{
-      //  console.log("items*************",this.get('model').dispatchItems.length);
-        //let dispatched=this.store.peekRecord('dispatch',updateDispatch.id);
-        //console.log("dispatched*************",dispatched);
-
-        /*for (var i=0; i<this.get('model').dispatchItems.length; i++) {
-          let item=this.store.createRecord("dispatch-item",this.get('model').dispatchItems[i]);
-          item.set('dispatch',dispatched);
-          item.save();
-        }
-      });*/
-
       this.transitionToRoute('dispatch.list');
-
   },
   addDispatchItem: function(){
     this.get('newDispatchItems').pushObject(this.get('newDispatchItem'));
@@ -52,39 +30,39 @@ export default Ember.Controller.extend({
 
   },
   regionSelected:function(region){
-
    let r=this.get('store').peekRecord('region',region);
-    this.get('zonesInRegion').length=0;
-    var that=this;
-    debugger;
-   var zones=this.get('store').query('zone', {
-        filter: {
-          region: region,
+   this.get('zonesInRegion').length=0;
 
+   this.get('store').query('zone', {
+        filter: {
+          region: region
         }
-      }).then(function(zones){
+      }).then((zones)=>{
+        console.log("zones----",zones);
         for(var zi=0;zi<zones.get('content').length;zi++){
-          if(Object.keys(zones.get('content')[zi]._data).length!=0){
-            that.get('zonesInRegion').pushObject(zones.get('content')[zi]);
+
+          if(Object.keys(zones.get('content')[zi]._data).length!==0){
+            this.get('zonesInRegion').pushObject(zones.get('content')[zi]);
           }
         }
+          console.log('****zonesInRegion*****',this.zonesInRegion);
       });
 
-    this.get('newDispatch').region=r;
+    this.get('dispatch').region=r;
 
   },
   zoneSelected:function(zone){
     let z=this.get('store').peekRecord('zone',zone);
     this.get('woredasInZone').length=0;
-    var that=this;
-    var woredas=this.get('store').query('woreda', {
+    this.get('store').query('woreda', {
         filter: {
           zone: zone
         }
-      }).then(function(woredas){
+      }).then((woredas)=>{
+
         for(var wi=0;wi<woredas.get('content').length;wi++){
-          if(Object.keys(woredas.get('content')[wi]._data).length!=0){
-            that.get('woredasInZone').pushObject(woredas.get('content')[wi]);
+          if(Object.keys(woredas.get('content')[wi]._data).length!==0){
+            this.get('woredasInZone').pushObject(woredas.get('content')[wi]);
           }
         }
       });
@@ -96,13 +74,13 @@ export default Ember.Controller.extend({
     let w=this.get('store').peekRecord('woreda',woreda);
     this.get('fdpsInWoreda').length=0;
     var that=this;
-    var fdps=this.get('store').query('fdp', {
+    this.get('store').query('fdp', {
         filter: {
           woreda: woreda
         }
-      }).then(function(fdps){
+      }).then((fdps)=>{
         for(var fi=0;fi<fdps.get('content').length;fi++){
-          if(Object.keys(fdps.get('content')[fi]._data).length!=0){
+          if(Object.keys(fdps.get('content')[fi]._data).length!==0){
             that.get('fdpsInWoreda').pushObject(fdps.get('content')[fi]);
           }
         }

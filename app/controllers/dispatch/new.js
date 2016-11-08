@@ -24,7 +24,6 @@ export default Ember.Controller.extend({
     createDispatch: function(){
 
       let newDispatch = this.store.createRecord( "dispatch", this.get('newDispatch'));
-      debugger;
 
       newDispatch.save().then(()=>{
         console.log("items*************",this.get('newDispatchItems').length);
@@ -53,8 +52,7 @@ export default Ember.Controller.extend({
    let r=this.get('store').peekRecord('region',region);
     this.get('zonesInRegion').length=0;
     var that=this;
-    debugger;
-   var zones=this.get('store').query('zone', {
+   this.get('store').query('zone', {
         filter: {
           region: region,
 
