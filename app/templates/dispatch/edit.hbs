@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <label for="gin">GIN</label>
                 <div class="form-group">
-                  {{ input value= model.dispatch.gin  type="text" class="form-control" disabled=disableFlag}}
+                  {{ input value= dispatch.gin  type="text" class="form-control"  }}
                 </div>
             </div>
         </div>
@@ -12,35 +12,44 @@
   <div class="col-md-4">
       <label for="projectCode">Project</label>
       <div class="form-group">
-        {{input value=model.dispatch.projectCode type="text" class="form-control" disabled=disableFlag }}
+        <select class="form-control" value={{dispatch.projectCode}} onchange={{action (mut dispatch.projectCode) value="target.value"}}>
+          {{#each projects as |project|}}
+            <option value={{project}} selected={{eq project dispatch.Project}}>{{project}}</option>
+            {{/each}}
+        </select>
       </div>
-
   </div>
   <div class="col-md-4">
       <label for="siCode">SI Code(Donor)</label>
       <div class="form-group">
-        {{input value=model.dispatch.siCode type="text" class="form-control" disabled=disableFlag  }}
+          <select class="form-control" value=dispatch.siCode name="">
+              <option>---Choose project code---</option>
+              {{#each siCodes as |siCode|}}
+              <option value={{siCode}} selected={{eq siCode dispatch.siCode}}>{{siCode}}</option>
+              {{/each}}
+          </select>
       </div>
-
   </div>
   <div class="col-md-4">
       <label for="requisitionNo">Requisition #</label>
-      <div class="form-group">
-        {{input value=model.dispatch.requisitionNo type="text" class="form-control" disabled=disableFlag }}
-      </div>
+    {{input value=dispatch.requisitionNo id="requisitionNo" type="text" class="form-control"}}
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
       <label for="dispatchDate">Dispatched Date</label>
       <div class="form-group">
-        {{bootstrap-datepicker value=model.dispatch.dispatchDate autoclose=true disabled=disableFlag }}
+        {{bootstrap-datepicker value=dispatch.dispatchDate autoclose=true }}
       </div>
   </div>
   <div class="col-md-6">
       <label for="dispatchMonth">Dispatch Month</label>
       <div class="form-group">
-        {{input value=model.dispatch.dispatchMonth type="text" class="form-control" disabled=disableFlag }}
+          <select class="form-control" value={{dispatch.dispatchMonth}} onchange={{action (mut dispatch.dispatchMonth) value="target.value"}}>
+            {{#each months as |month|}}
+              <option value={{month}} selected={{eq month dispatch.dispatchMonth}}>{{month}}</option>
+              {{/each}}
+          </select>
       </div>
   </div>
 
@@ -49,13 +58,17 @@
   <div class="col-md-6">
       <label for="store">Store</label>
       <div class="form-group">
-        {{input value=model.dispatch._store type="text" class="form-control" disabled=disableFlag }}
+        <select class="form-control" value={{dispatch._store}} onchange={{action (mut dispatch._store) value="target.value"}}>
+          {{#each _stores as |_store|}}
+            <option value={{_store}} selected={{eq _store dispatch._store}}>{{_store}}</option>
+            {{/each}}
+        </select>
       </div>
   </div>
   <div class="col-md-6">
       <label for="storeKeeper">Store Keeper</label>
       <div class="form-group">
-        {{ input value=model.dispatch.storeKeeper  type="text" class="form-control" disabled=disableFlag  }}
+        {{ input value=dispatch.storeKeeper id="storeKeeper" type="text" class="form-control"  }}
       </div>
   </div>
 </div>
@@ -63,13 +76,25 @@
   <div class="col-md-6">
       <label for="region">Region</label>
       <div class="form-group">
-        {{ input value=model.dispatch.region.name type="text" class="form-control" disabled=disableFlag }}
+          <select class="form-control" value={{dispatch.region}} onchange={{action 'regionSelected' value="target.value"}}>
+            <option>--select region--</option>
+            {{#each model.regions as |region|}}
+              <option value={{region.id}} selected={{eq region.id dispatch.region.id}}>{{region.name}}</option>
+
+              {{/each}}
+          </select>
+
       </div>
   </div>
   <div class="col-md-6">
       <label for="zone">Zone</label>
       <div class="form-group">
-        {{ input value=model.dispatch.zone.name  type="text" class="form-control" disabled=disableFlag }}
+        <select class="form-control" value={{dispatch.zone}} onchange={{action 'zoneSelected' value="target.value"}}>
+          <option>--select zone--</option>
+          {{#each zonesInRegion as |zone|}}
+            <option value={{zone.id}} selected={{eq zone.id dispatch.zone.id}}>{{zone._data.name}}</option>
+          {{/each}}
+        </select>
       </div>
   </div>
 </div>
@@ -77,13 +102,23 @@
   <div class="col-md-6">
       <label for="woreda">Woreda</label>
       <div class="form-group">
-        {{ input value=model.dispatch.woreda.name  type="text" class="form-control" disabled=disableFlag  }}
+        <select class="form-control" value={{dispatch.woreda}} onchange={{action 'woredaSelected' value="target.value"}}>
+          <option>--select woreda--</option>
+          {{#each woredasInZone as |woreda|}}
+            <option value={{woreda.id}} selected={{eq woreda.id dispatch.woreda.id}}>{{woreda._data.name}}</option>
+            {{/each}}
+        </select>
       </div>
   </div>
   <div class="col-md-6">
       <label for="fdp">FDP</label>
       <div class="form-group">
-        {{ input value=model.dispatch.fdp.name type="text" class="form-control" disabled=disableFlag }}
+        <select class="form-control" value={{dispatch.fdp}} onchange={{action 'fdpSelected' value="target.value"}}>
+          <option>--select fdp--</option>
+          {{#each fdpsInWoreda as |fdp|}}
+            <option value={{fdp.id}} selected={{eq fdp.id dispatch.fdp.id}}>{{fdp._data.name}}</option>
+            {{/each}}
+        </select>
       </div>
   </div>
 </div>
@@ -92,7 +127,6 @@
       <div class="col-md-12">
           <div class="panel panel-info">
               <div class="panel-heading">Dispatch Items</div>
-
               <table class="table table-striped">
                   <thead>
                   <tr>
@@ -106,7 +140,7 @@
                   </thead>
 
                   <tbody>
-                  {{#each model.dispatchItems as |item| }}
+                  {{#each dispatchItems as |item| }}
                   <tr>
                       <td> {{ input value=item.commodityClass type="select" class="form-control"  }}</td>
                       <td> {{ input value=item.commodity type="select" class="form-control"  }}</td>
@@ -116,8 +150,21 @@
                       <td> {{ input value=item.dispatchMT  type="text" class="form-control"  }}</td>
 
                   </tr>
-                  {{/each}}
+                    {{/each}}
+                  <tr>
 
+                      <td> {{ input value=newDispatchItem.commodityClass type="select" class="form-control"  }}</td>
+                      <td> {{ input value=newDispatchItem.commodity type="select" class="form-control"  }}</td>
+                      <td> {{ input value=newDispatchItem.roundedAllocationMT type="text" class="form-control"  }}</td>
+                      <td> {{ input value=newDispatchItem.totalUnitsDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=newDispatchItem.quintalDispatched type="text" class="form-control"  }}</td>
+                      <td> {{ input value=newDispatchItem.dispatchMT  type="text" class="form-control"  }}</td>
+                      <td>
+                        <button type="button" class="btn btn-primary" onclick={{ action 'addDispatchItem'}}>Add</button>
+                      </td>
+
+
+                  </tr>
 
 
                   </tbody>
@@ -137,13 +184,13 @@
               <div class="col-md-6">
                   <label for="transporter">Transporter</label>
                   <div class="form-group">
-                    {{ input value=model.dispatch.transporter  type="text" class="form-control" disabled=disableFlag }}
+                    {{ input value=dispatch.transporter  type="text" class="form-control"  }}
                   </div>
               </div>
               <div class="col-md-6">
                   <label for="plateNo">Plate #</label>
                   <div class="form-group">
-                    {{ input value=model.dispatch.plateNo type="text" class="form-control" disabled=disableFlag }}
+                    {{ input value=dispatch.plateNo type="text" class="form-control"  }}
                   </div>
               </div>
             </div>
@@ -151,13 +198,13 @@
               <div class="col-md-6">
                   <label for="trailerNo">Trailer plate #</label>
                   <div class="form-group">
-                    {{ input value=model.dispatch.trailerNo type="text" class="form-control" disabled=disableFlag}}
+                    {{ input value=dispatch.trailerNo type="text" class="form-control"  }}
                   </div>
               </div>
               <div class="col-md-6">
                   <label for="driverName">Driver's name</label>
                   <div class="form-group">
-                    {{ input value=model.dispatch.driverName type="text" class="form-control" disabled=disableFlag }}
+                    {{ input value=dispatch.driverName type="text" class="form-control"  }}
                   </div>
               </div>
             </div>
@@ -173,9 +220,8 @@
     </div>
 
     <div class="col-md-6">
-        <a href="#"  class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
-        <a href="#" class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
-        <a href="#" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
+        <a onclick={{ action "saveDispatch" }}   class="btn btn-primary"><i class="fa fa-save"></i> Save</a>
+        <a href="/dispatch" class="btn btn-default"><i class="fa fa-cancel"></i> Cancel</a>
     </div>
 </div>
     </form>
