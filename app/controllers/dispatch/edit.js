@@ -67,7 +67,7 @@ export default Ember.Controller.extend({
         }
       });
 
-      this.get('newDispatch').zone=z;
+      this.get('dispatch').zone=z;
 
   },
   woredaSelected:function(woreda){
@@ -85,12 +85,12 @@ export default Ember.Controller.extend({
           }
         }
       });
-      this.get('newDispatch').woreda=w;
+      this.get('dispatch').woreda=w;
 
   },
   fdpSelected:function(fdp){
     let f=this.get('store').peekRecord('fdp',fdp);
-    this.get('newDispatch').fdp=f;
+    this.get('dispatch').fdp=f;
 
   }
 }
